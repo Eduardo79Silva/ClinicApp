@@ -1,3 +1,4 @@
+import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class _MainPageState extends State<MainPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
-                    children: [BigText(text: "Clínica Hora Sã", color: AppColors.mainColor)],
+                    children: [BigText(text: "Clínica Hora Sã", color: AppColors.mainColor,size: 30,)],
                   ),
                   Container(
                     width: 45,
@@ -41,6 +42,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
+          ServicesBody()
         ],
       ),
     );
