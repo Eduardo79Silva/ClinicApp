@@ -1,3 +1,4 @@
+
 import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+      print(MediaQuery.of(context).size.height);
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[100],
       body: Column(
         children: [
           Container(

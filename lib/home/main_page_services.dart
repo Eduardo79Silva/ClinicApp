@@ -1,7 +1,9 @@
 import 'package:clinic_app/utils/colors.dart';
+import 'package:clinic_app/utils/dimensions.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:clinic_app/widgets/IconsText.dart';
 import 'package:clinic_app/widgets/SmallText.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
 class ServicesBody extends StatefulWidget {
@@ -14,7 +16,7 @@ class ServicesBody extends StatefulWidget {
 class _ServicesBodyState extends State<ServicesBody> {
   PageController pageController = PageController(viewportFraction: 0.8);
   var _currPageValue = 0.0;
-  var _height = 220;
+  var _height = Dimensions.pageViewContainer;
   double _scaleFactor = 0.8;
 
   @override
@@ -34,15 +36,29 @@ class _ServicesBodyState extends State<ServicesBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 320,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: 5,
-        itemBuilder: (context, position) {
-          return _builderPageItem(position);
-        },
-      ),
+    return Column(
+      children: [
+        Container(
+          height: Dimensions.pageView,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: 5,
+            itemBuilder: (context, position) {
+              return _builderPageItem(position);
+            },
+          ),
+        ),
+        DotsIndicator(
+          dotsCount: 5,
+          position: _currPageValue,
+          decorator: DotsDecorator(
+            activeColor: AppColors.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          ),
+        )
+      ],
     );
   }
 
@@ -73,7 +89,7 @@ class _ServicesBodyState extends State<ServicesBody> {
       transform: matrix,
       child: Stack(children: [
         Container(
-          height: 220,
+          height: Dimensions.pageViewContainer,
           margin: EdgeInsets.only(left: 10, right: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
@@ -85,10 +101,27 @@ class _ServicesBodyState extends State<ServicesBody> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 120,
+            height: Dimensions.pageViewTextContainer,
             margin: EdgeInsets.only(left: 30, right: 30, bottom: 25),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30), color: Colors.white),
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                      color: Color(0xFFe8e8e8),
+                      blurRadius: 5.0,
+                      offset: Offset(0,5)
+                  ),
+                  BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(5,0)
+                  ),
+                  BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-5,0)
+                  )
+                ]
+            ),
             child: Container(
               padding: EdgeInsets.only(top: 10, left: 15, right: 15),
               child: Column(
@@ -126,23 +159,18 @@ class _ServicesBodyState extends State<ServicesBody> {
                     height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                           child: IconAndTextWidget(
                               icon: Icons.circle,
                               text: "Normal",
                               iconColor: AppColors.iconColor1)),
-                      SizedBox(
-                        width: 10,
-                      ),
                       Expanded(
                           child: IconAndTextWidget(
                               icon: Icons.location_pin,
                               text: "1.7km",
                               iconColor: AppColors.mainColor)),
-                      SizedBox(
-                        width: 10,
-                      ),
                       Expanded(
                           child: IconAndTextWidget(
                               icon: Icons.access_time_rounded,
