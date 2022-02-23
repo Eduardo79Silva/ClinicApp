@@ -1,3 +1,4 @@
+import 'package:clinic_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class BigText extends StatelessWidget {
@@ -6,7 +7,7 @@ class BigText extends StatelessWidget {
   double size;
   TextOverflow overFlow;
   BigText({Key? key, this.color = const Color(0xFF332d2b), required this.text,
-  this.size=20,
+  this.size= 20,
   this.overFlow=TextOverflow.fade}) : super(key: key);
 
   @override

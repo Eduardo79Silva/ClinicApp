@@ -127,9 +127,9 @@ class _ServicesBodyState extends State<ServicesBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BigText(text: "Fisioterapeuta"),
+                  BigText(text: "Fisioterapeuta", size: Dimensions.height20,),
                   SizedBox(
-                    height: 10,
+                    height: Dimensions.height10,
                   ),
                   Row(
                     children: [
@@ -142,21 +142,21 @@ class _ServicesBodyState extends State<ServicesBody> {
                                     size: 15,
                                   ))),
                       SizedBox(
-                        width: 10,
+                        width: Dimensions.width10,
                       ),
                       SmallText(text: "4.5"),
                       SizedBox(
-                        width: 10,
+                        width: Dimensions.width10,
                       ),
                       SmallText(text: "1287"),
                       SizedBox(
-                        width: 10,
+                        width: Dimensions.width10,
                       ),
                       SmallText(text: "comments")
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: Dimensions.height20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

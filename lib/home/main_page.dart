@@ -15,7 +15,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-      print(MediaQuery.of(context).size.height);
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: Column(
