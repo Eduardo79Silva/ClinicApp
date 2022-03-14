@@ -4,6 +4,8 @@ import 'package:clinic_app/widgets/BigText.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
+import '../utils/dimensions.dart';
+import 'main_page_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -44,7 +46,9 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
-          ServicesBody()
+          ServicesBody(),
+          SizedBox(height: Dimensions.height20),
+          WidgetsWindows()
         ],
       ),
     );

@@ -96,7 +96,7 @@ class _ServicesBodyState extends State<ServicesBody> {
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/image/food0.png"))),
+                  image: AssetImage("assets/image/fisioterapia.jpg"))),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -152,7 +152,7 @@ class _ServicesBodyState extends State<ServicesBody> {
                       SizedBox(
                         width: Dimensions.width10,
                       ),
-                      SmallText(text: "comments")
+                      SmallText(text: "comentários")
                     ],
                   ),
                   SizedBox(
