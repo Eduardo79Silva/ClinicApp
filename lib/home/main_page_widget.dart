@@ -89,7 +89,7 @@ class _WidgetsWindowsState extends State<WidgetsWindows> {
                       child: IconAndTextWidget(
                           icon: Icons.location_pin,
                           text: "1.7km",
-                          iconColor: AppColors.mainColor)),
+                          iconColor: AppColors.mainColor2)),
                   Expanded(
                       child: IconAndTextWidget(
                           icon: Icons.access_time_rounded,

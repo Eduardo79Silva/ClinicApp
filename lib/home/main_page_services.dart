@@ -52,7 +52,7 @@ class _ServicesBodyState extends State<ServicesBody> {
           dotsCount: 5,
           position: _currPageValue,
           decorator: DotsDecorator(
-            activeColor: AppColors.mainColor,
+            activeColor: AppColors.mainColor2,
             size: const Size.square(9.0),
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -127,7 +127,7 @@ class _ServicesBodyState extends State<ServicesBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BigText(text: "Fisioterapeuta", size: Dimensions.height20,),
+                  BigText(text: "Fisioterapia", size: Dimensions.height20,),
                   SizedBox(
                     height: Dimensions.height10,
                   ),
@@ -170,7 +170,7 @@ class _ServicesBodyState extends State<ServicesBody> {
                           child: IconAndTextWidget(
                               icon: Icons.location_pin,
                               text: "1.7km",
-                              iconColor: AppColors.mainColor)),
+                              iconColor: AppColors.mainColor2)),
                       Expanded(
                           child: IconAndTextWidget(
                               icon: Icons.access_time_rounded,
