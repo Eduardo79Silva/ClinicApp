@@ -2,6 +2,7 @@ import 'package:clinic_app/utils/colors.dart';
 import 'package:clinic_app/utils/dimensions.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:clinic_app/widgets/IconsText.dart';
+import 'package:clinic_app/widgets/Service.dart';
 import 'package:clinic_app/widgets/SmallText.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class _ServicesBodyState extends State<ServicesBody> {
   var _currPageValue = 0.0;
   var _height = Dimensions.pageViewContainer;
   double _scaleFactor = 0.8;
+  List<Service> services = [new Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg")];
+
 
   @override
   void initState() {
@@ -44,7 +47,7 @@ class _ServicesBodyState extends State<ServicesBody> {
             controller: pageController,
             itemCount: 5,
             itemBuilder: (context, position) {
-              return _builderPageItem(position);
+              return _builderPageItem(position, services[position]);
             },
           ),
         ),
@@ -62,7 +65,7 @@ class _ServicesBodyState extends State<ServicesBody> {
     );
   }
 
-  Widget _builderPageItem(int index) {
+  Widget _builderPageItem(int index, Service service) {
     Matrix4 matrix = new Matrix4.identity();
 
     if(index == _currPageValue.floor()){
@@ -96,7 +99,7 @@ class _ServicesBodyState extends State<ServicesBody> {
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/image/fisioterapia.jpg"))),
+                  image: AssetImage(service.img!))),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -127,7 +130,7 @@ class _ServicesBodyState extends State<ServicesBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BigText(text: "Fisioterapia", size: Dimensions.height20,),
+                  BigText(text: service.name!, size: Dimensions.height20,),
                   SizedBox(
                     height: Dimensions.height10,
                   ),

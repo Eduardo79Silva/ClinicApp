@@ -58,7 +58,7 @@ class _MainPageState extends State<MainPage> {
             Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Align(alignment: Alignment.centerLeft,
-                  child: BigText(text: "Olá, Sr. Diogo, ",size: 25,weight: FontWeight.bold, )),
+                  child: BigText(text: "Olá Sr. Diogo, ",size: 25,weight: FontWeight.bold, )),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30.0, top: 10.0),
