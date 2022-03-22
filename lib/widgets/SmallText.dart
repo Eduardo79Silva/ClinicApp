@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SmallText extends StatelessWidget {
@@ -16,6 +17,7 @@ class SmallText extends StatelessWidget {
     return Flexible(
       child: Text(
         text,
+        overflow: TextOverflow.fade,
         softWrap: false,
         style:TextStyle(
             color: color,

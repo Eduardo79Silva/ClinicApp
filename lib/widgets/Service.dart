@@ -5,6 +5,7 @@ class Service {
   String? img;
   int? price;
   int? stars;
+  String? schedule;
 
-  Service({this.id, this.name, this.description, this.img, this.price, this.stars});
+  Service({this.id, this.name, this.description, this.img, this.price, this.stars, this.schedule});
 }

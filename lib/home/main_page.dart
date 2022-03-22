@@ -1,6 +1,8 @@
 
 import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
+import 'package:clinic_app/widgets/SideDrawer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
@@ -17,24 +19,35 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: SideDrawer(),
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+                color: Colors.grey[200],
+              ),
               child: Container(
-                margin: EdgeInsets.only(top: 45, bottom: 45),
+                //color: Colors.grey[300],
+                margin: EdgeInsets.only(top: 20, bottom: 20),
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    IconButton(onPressed: () => _scaffoldKey.currentState?.openDrawer(), icon: Icon(Icons.menu, color: AppColors.mainColor2,)),
                     Column(
                       children: [new Container(
-                        height: Dimensions.height20*3,
-                        width: Dimensions.width20*27,
+                        height: Dimensions.height20*2,
+                        width: Dimensions.width20*20,
                         decoration: new BoxDecoration(
                           image: new DecorationImage(image: new AssetImage("assets/image/logo.png"), fit: BoxFit.fill,),
                         ),
@@ -55,6 +68,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
+            SizedBox(height: Dimensions.height20*2,),
             Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Align(alignment: Alignment.centerLeft,
@@ -116,7 +130,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                           SmallText(text: "4.5"),
                           SizedBox(
-                            width: Dimensions.width10,
+                            width: Dimensions.width20,
                           ),
                           SmallText(text: "1287"),
                           SizedBox(

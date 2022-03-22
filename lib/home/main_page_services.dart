@@ -19,7 +19,11 @@ class _ServicesBodyState extends State<ServicesBody> {
   var _currPageValue = 0.0;
   var _height = Dimensions.pageViewContainer;
   double _scaleFactor = 0.8;
-  List<Service> services = [new Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg")];
+  List<Service> services = [new Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg"),
+                            new Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg"),
+                            new Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg"),
+                            new Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg"),
+                            new Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg")];
 
 
   @override
@@ -45,7 +49,7 @@ class _ServicesBodyState extends State<ServicesBody> {
           height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
-            itemCount: 5,
+            itemCount: services.length,
             itemBuilder: (context, position) {
               return _builderPageItem(position, services[position]);
             },
@@ -149,7 +153,7 @@ class _ServicesBodyState extends State<ServicesBody> {
                       ),
                       SmallText(text: "4.5"),
                       SizedBox(
-                        width: Dimensions.width10,
+                        width: Dimensions.width20,
                       ),
                       SmallText(text: "1287"),
                       SizedBox(
@@ -178,7 +182,8 @@ class _ServicesBodyState extends State<ServicesBody> {
                           child: IconAndTextWidget(
                               icon: Icons.access_time_rounded,
                               text: "11:00 - 19:30",
-                              iconColor: AppColors.iconColor2)),
+                              iconColor: AppColors.iconColor2),),
+
                     ],
                   )
                 ],
