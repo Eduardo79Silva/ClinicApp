@@ -1,3 +1,5 @@
+import 'package:clinic_app/utils/colors.dart';
+import 'package:clinic_app/utils/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
 class SideDrawer extends StatelessWidget {
@@ -15,7 +17,7 @@ class SideDrawer extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: AppColors.mainColor2,
             ),
           ),
           ListTile(
@@ -24,8 +26,8 @@ class SideDrawer extends StatelessWidget {
             onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text('Cart'),
+            leading: Icon(Icons.calendar_today_rounded),
+            title: Text('Marcar Consulta'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(

@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
               ),
               child: Container(
                 //color: Colors.grey[300],
-                margin: EdgeInsets.only(top: 20, bottom: 20),
+                margin: EdgeInsets.only(top: 40, bottom: 20),
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
