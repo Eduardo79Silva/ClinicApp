@@ -147,13 +147,13 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           Expanded(
                               child: IconAndTextWidget(
-                                  icon: Icons.circle,
-                                  text: "Normal",
+                                  icon: Icons.medical_services_rounded,
+                                  text: "Dentista",
                                   iconColor: AppColors.iconColor1)),
                           Expanded(
                               child: IconAndTextWidget(
-                                  icon: Icons.location_pin,
-                                  text: "1.7km",
+                                  icon: Icons.calendar_today_rounded,
+                                  text: "20 Março",
                                   iconColor: AppColors.mainColor2)),
                           Expanded(
                               child: IconAndTextWidget(
