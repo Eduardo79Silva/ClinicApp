@@ -20,7 +20,7 @@ class IconAndTextWidget extends StatelessWidget {
       children: [
         Icon(icon, color: iconColor,),
         SizedBox(width: 5,),
-        SmallText(text: text)
+        Expanded(child: SmallText(text: text, overFlow: TextOverflow.fade,))
       ],
     );
   }

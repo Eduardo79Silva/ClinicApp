@@ -80,7 +80,7 @@ class _MainPageState extends State<MainPage> {
                   child: SmallText(text: "Marque já a sua consulta \nou veja os documentos de consultas passadas",size: 15, color: Colors.grey[500],)),
             ),
             SizedBox(height: Dimensions.height20*2),
-            ServicesBody(),
+            ServicesBody(mainPage: true,),
             SizedBox(height: Dimensions.height20*2),
             Align(
               alignment: Alignment.bottomCenter,

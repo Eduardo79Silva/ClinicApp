@@ -27,15 +27,17 @@ class SideDrawer extends StatelessWidget {
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.calendar_today_rounded),
-            title: Text('Marcar Consulta'),
-            onTap: () {
-              Navigator.of(context).pop();
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const AppointmentPage()),
-    );}
-          ),
+              leading: Icon(Icons.calendar_today_rounded),
+              title: Text('Marcar Consulta'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AppointmentPage(
+                            hasService: false,
+                          )),
+                );
+              }),
           ListTile(
             leading: Icon(Icons.all_inbox_rounded),
             title: Text('Documentos'),

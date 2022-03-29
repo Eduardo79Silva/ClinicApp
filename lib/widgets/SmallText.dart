@@ -14,18 +14,15 @@ class SmallText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Text(
-        text,
-        overflow: TextOverflow.fade,
-        softWrap: false,
-        style:TextStyle(
-            color: color,
-            fontSize: size,
-            overflow: overFlow,
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w100
-        ),
+    return Text(
+      text,
+      overflow: overFlow,
+      softWrap: false,
+      style:TextStyle(
+          color: color,
+          fontSize: size,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w100
       ),
     );
   }

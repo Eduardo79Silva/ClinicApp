@@ -8,16 +8,20 @@ import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 import '../widgets/IconsText.dart';
 import '../widgets/SmallText.dart';
+import 'appointment_page_2.dart';
 import 'main_page_widget.dart';
 
 class AppointmentPage extends StatefulWidget {
-  const AppointmentPage({Key? key}) : super(key: key);
+  final bool hasService;
+  final String? service;
+  const AppointmentPage({required this.hasService, this.service});
 
   @override
   _AppointmentPageState createState() => _AppointmentPageState();
 }
 
 class _AppointmentPageState extends State<AppointmentPage> {
+  TextEditingController symptomns = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,6 +121,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
               left: Dimensions.width20 * 3, right: Dimensions.width20 * 3),
           height: 7 * 24.0,
           child: TextField(
+            controller: symptomns,
             textInputAction: TextInputAction.go,
             maxLines: 7 * 24,
             decoration: InputDecoration(
@@ -151,6 +156,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
                       padding: EdgeInsets.all(5) //content padding inside button
                       ),
                   onPressed: () {
+                    !widget.hasService ? Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AppointmentPage2())) :
                     Navigator.of(context).pop();
                   },
                   child: Row(

@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'appointment_page_1.dart';
 
 class ServicesBody extends StatefulWidget {
-  const ServicesBody({Key? key}) : super(key: key);
+  final bool mainPage;
+  const ServicesBody({Key? key, required this.mainPage}) : super(key: key);
 
   @override
   _ServicesBodyState createState() => _ServicesBodyState();
@@ -97,9 +98,9 @@ class _ServicesBodyState extends State<ServicesBody> {
     return Transform(
       transform: matrix,
       child: InkWell(
-        onTap: () {Navigator.push(
+        onTap: () {widget.mainPage ? Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AppointmentPage()));},
+            MaterialPageRoute(builder: (context) => AppointmentPage(hasService: true, service: service.name,))) : Navigator.of(context).pop();},
         child: Stack(children: [
           Container(
             height: Dimensions.pageViewContainer,
