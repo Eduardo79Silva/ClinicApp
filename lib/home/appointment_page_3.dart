@@ -39,13 +39,16 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
             ),
             child: Container(
               //color: Colors.grey[300],
-              margin: EdgeInsets.only(top: 40, bottom: 20),
-              padding: EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(top: 40, bottom: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () => {Navigator.popUntil(context, ModalRoute.withName('/'))},
+                      onPressed: () => {
+                            Navigator.popUntil(
+                                context, ModalRoute.withName('/'))
+                          },
                       icon: Icon(
                         Icons.close_rounded,
                         color: AppColors.mainColor2,
@@ -111,18 +114,15 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
             child: Align(
                 alignment: Alignment.centerLeft,
                 child: SmallText(
-                  text:
-                  "Escolha o horário que\ndeseja para a sua consulta",
+                  text: "Escolha o horário que\ndeseja para a sua consulta",
                   size: 15,
                   color: Colors.grey[500],
                 )),
           ),
           SizedBox(height: Dimensions.height20 * 2),
-
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: TableCalendar(
-              locale: 'pt_PT',
               firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.utc(2030, 3, 14),
               focusedDay: DateTime.now(),
@@ -136,6 +136,42 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                 });
               },
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 20*3),
+            child: SizedBox(
+                height: Dimensions.height10 * 6, //height of button
+                width: Dimensions.width20 * 17, //width of button
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 7,
+                        primary:
+                            AppColors.mainColor2, //background color of button
+                        shadowColor: AppColors.mainColor2,
+                        shape: RoundedRectangleBorder(
+                            //to set border radius to button
+                            borderRadius: BorderRadius.circular(50)),
+                        padding: const EdgeInsets.all(5) //content padding inside button
+                        ),
+                    onPressed: () {
+                      Navigator.popUntil(
+                          context, ModalRoute.withName('/'));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Concluir",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                        ),
+                        Icon(Icons.check_circle_outline_rounded)
+                      ],
+                    ))),
           ),
         ]),
       ),

@@ -111,7 +111,7 @@ class _MainPageState extends State<MainPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      BigText(text: "A sua proxima consula", size: Dimensions.height20,),
+                      BigText(text: "A sua próxima consula", size: Dimensions.height20,),
                       SizedBox(
                         height: Dimensions.height10,
                       ),
