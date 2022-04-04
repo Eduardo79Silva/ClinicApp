@@ -9,6 +9,7 @@ import '../utils/dimensions.dart';
 import '../widgets/IconsText.dart';
 import '../widgets/SmallText.dart';
 import 'appointment_page_2.dart';
+import 'appointment_page_3.dart';
 import 'main_page_widget.dart';
 
 class AppointmentPage extends StatefulWidget {
@@ -159,7 +160,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
                     !widget.hasService ? Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => AppointmentPage2())) :
-                    Navigator.of(context).pop();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AppointmentPage3()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

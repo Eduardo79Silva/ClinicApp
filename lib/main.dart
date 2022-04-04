@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home/main_page.dart';
 import 'package:get/get.dart';
 
+
 void main() {
   runApp(const MyApp());
 }

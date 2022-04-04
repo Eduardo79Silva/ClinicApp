@@ -113,53 +113,8 @@ class _AppointmentPageState2 extends State<AppointmentPage2> {
                   color: Colors.grey[500],
                 )),
           ),
-          SizedBox(height: Dimensions.height20 * 2),
+          SizedBox(height: Dimensions.height20 * 4),
           ServicesBody(mainPage: false),
-          SizedBox(height: Dimensions.height20 * 3),
-          Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.mainColor2.withOpacity(0.6),
-                  spreadRadius: 4,
-                  blurRadius: 50,
-                  offset: Offset(0, 2),
-                )
-              ],
-            ),
-            child: SizedBox(
-                height: Dimensions.height10 * 6, //height of button
-                width: Dimensions.width20 * 17, //width of button
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        elevation: 7,
-                        primary: AppColors.mainColor2, //background color of button
-                        shadowColor: AppColors.mainColor2,
-                        shape: RoundedRectangleBorder(
-                          //to set border radius to button
-                            borderRadius: BorderRadius.circular(50)),
-                        padding: EdgeInsets.all(5) //content padding inside button
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        Text(
-                          "Seguinte",
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Icon(Icons.arrow_forward_rounded)
-                      ],
-                    ))),
-          ),
-          SizedBox(height: Dimensions.height20 * 3),
         ]),
       ),
     );

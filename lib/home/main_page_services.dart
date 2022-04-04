@@ -8,6 +8,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'appointment_page_1.dart';
+import 'appointment_page_3.dart';
 
 class ServicesBody extends StatefulWidget {
   final bool mainPage;
@@ -100,7 +101,9 @@ class _ServicesBodyState extends State<ServicesBody> {
       child: InkWell(
         onTap: () {widget.mainPage ? Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AppointmentPage(hasService: true, service: service.name,))) : Navigator.of(context).pop();},
+            MaterialPageRoute(builder: (context) => AppointmentPage(hasService: true, service: service.name,))) : Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AppointmentPage3()));},
         child: Stack(children: [
           Container(
             height: Dimensions.pageViewContainer,

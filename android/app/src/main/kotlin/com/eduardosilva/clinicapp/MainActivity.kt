@@ -1,4 +1,4 @@
-package com.example.clinicapp.clinic_app
+package com.eduardosilva.clinicapp
 
 import io.flutter.embedding.android.FlutterActivity
 
