@@ -23,6 +23,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
 
   DateTime? _selectedDay;
   DateTime? _focusedDay;
+  var _res;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +48,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                   IconButton(
                       onPressed: () => {
                             Navigator.popUntil(
-                                context, ModalRoute.withName('/'))
+                                context, ModalRoute.withName('MainPage'))
                           },
                       icon: Icon(
                         Icons.close_rounded,
@@ -119,13 +120,38 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                   color: Colors.grey[500],
                 )),
           ),
-          SizedBox(height: Dimensions.height20 * 2),
+          SizedBox(height: Dimensions.height20 * 2.5),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(left: 30.0, bottom: 10,),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: IconAndTextWidget(
+                  icon: Icons.calendar_today_rounded,
+                  iconColor: AppColors.mainColor2,
+                  text: "Dia da Marcação",
+                  textSize: 17,
+                  textColor: Colors.black87,
+                  textWeight: FontWeight.bold,
+
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
             child: TableCalendar(
               firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.utc(2030, 3, 14),
               focusedDay: DateTime.now(),
+              calendarStyle: CalendarStyle(
+                defaultTextStyle: TextStyle(fontSize: 17),
+                rangeHighlightColor: AppColors.mainColor,
+                todayTextStyle: TextStyle(color: Colors.white, fontSize: 17),
+                todayDecoration: BoxDecoration(
+                  color: AppColors.mainColor2.withOpacity(0.5),
+                  shape: BoxShape.circle,
+                ),
+                selectedDecoration: BoxDecoration(
+                    color: AppColors.mainColor2, shape: BoxShape.circle),
+              ),
               selectedDayPredicate: (day) {
                 return isSameDay(_selectedDay, day);
               },
@@ -137,8 +163,71 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
               },
             ),
           ),
+          SizedBox(height: Dimensions.height20,),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0, bottom: 20),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconAndTextWidget(
+                      icon: Icons.more_time_rounded,
+                      iconColor: AppColors.mainColor2,
+                      text: "Hora da Marcação",
+                      textSize: 17,
+                      textColor: Colors.black87,
+                      textWeight: FontWeight.bold,
+
+                    )),
+              ),
+              RadioListTile(
+                  activeColor: AppColors.mainColor2,
+                  visualDensity: VisualDensity(vertical: 0.1),
+                  title: const Text("10:30"),
+                  value: '10:30',
+                  groupValue: _res,
+                  onChanged: (value) {
+                    setState(() {
+                      _res = value;
+                    });
+                  }),
+              RadioListTile(
+                  activeColor: AppColors.mainColor2,
+                  visualDensity: VisualDensity(vertical: 0.1),
+                  title: const Text("11:00"),
+                  value: '11:00',
+                  groupValue: _res,
+                  onChanged: (value) {
+                    setState(() {
+                      _res = value;
+                    });
+                  }),
+              RadioListTile(
+                  activeColor: AppColors.mainColor2,
+                  visualDensity: VisualDensity(vertical: 0.1),
+                  title: const Text("11:30"),
+                  value: '11:30',
+                  groupValue: _res,
+                  onChanged: (value) {
+                    setState(() {
+                      _res = value;
+                    });
+                  }),
+              RadioListTile(
+                activeColor: AppColors.mainColor2,
+                  visualDensity: VisualDensity(vertical: 0.1),
+                  title: const Text("12:00"),
+                  value: '12:00',
+                  groupValue: _res,
+                  onChanged: (value) {
+                    setState(() {
+                      _res = value;
+                    });
+                  }),
+            ],
+          ),
           Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 20*3),
+            padding: const EdgeInsets.only(top: 30, bottom: 20 * 3),
             child: SizedBox(
                 height: Dimensions.height10 * 6, //height of button
                 width: Dimensions.width20 * 17, //width of button
@@ -151,12 +240,10 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                         shape: RoundedRectangleBorder(
                             //to set border radius to button
                             borderRadius: BorderRadius.circular(50)),
-                        padding: const EdgeInsets.all(5) //content padding inside button
+                        padding: const EdgeInsets.all(
+                            5) //content padding inside button
                         ),
-                    onPressed: () {
-                      Navigator.popUntil(
-                          context, ModalRoute.withName('/'));
-                    },
+                    onPressed: () => {Navigator.of(context).popUntil(ModalRoute.withName("MainPage"))},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,

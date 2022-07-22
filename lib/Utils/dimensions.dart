@@ -7,7 +7,7 @@ class Dimensions{
 
   static double pageViewContainer = screenHeight/3.55;
   static double pageView = screenHeight/2.44;
-  static double pageViewTextContainer = screenHeight/6.5;
+  static double pageViewTextContainer = screenHeight/6;
 
   static double height10 = screenHeight/78.1;
   static double height15 = screenHeight/52.07;

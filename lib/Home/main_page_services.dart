@@ -23,11 +23,11 @@ class _ServicesBodyState extends State<ServicesBody> {
   var _currPageValue = 0.0;
   var _height = Dimensions.pageViewContainer;
   double _scaleFactor = 0.8;
-  List<Service> services = [new Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg"),
-                            new Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg"),
-                            new Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg"),
-                            new Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg"),
-                            new Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg")];
+  List<Service> services = [new Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg", stars: 5, doctor: "Fisioterapeuta Carina"),
+                            new Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg", stars: 3, doctor: "Dr. Alex"),
+                            new Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg", stars: 3, doctor: "Dr. Pedro"),
+                            new Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg", stars: 4, doctor: "Dra. Liliana"),
+                            new Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg", stars: 5, doctor: "Dra. Bruna")];
 
 
   @override
@@ -140,7 +140,7 @@ class _ServicesBodyState extends State<ServicesBody> {
                   ]
               ),
               child: Container(
-                padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+                padding: EdgeInsets.only(top: Dimensions.height10, left: Dimensions.height20, right: Dimensions.height15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -149,51 +149,29 @@ class _ServicesBodyState extends State<ServicesBody> {
                       height: Dimensions.height10,
                     ),
                     Row(
+
                       children: [
                         Wrap(
                             children: List.generate(
-                                5,
+                                service.stars!,
                                 (index) => Icon(
                                       Icons.star,
                                       color: AppColors.mainColor,
-                                      size: 15,
+                                      size: Dimensions.height20,
                                     ))),
                         SizedBox(
                           width: Dimensions.width10,
                         ),
-                        SmallText(text: "4.5"),
-                        SizedBox(
-                          width: Dimensions.width20,
-                        ),
-                        SmallText(text: "1287"),
-                        SizedBox(
-                          width: Dimensions.width10,
-                        ),
-                        SmallText(text: "comentários")
-                      ],
-                    ),
-                    SizedBox(
-                      height: Dimensions.height20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                            child: IconAndTextWidget(
-                                icon: Icons.circle,
-                                text: "Normal",
-                                iconColor: AppColors.iconColor1)),
-                        Expanded(
-                            child: IconAndTextWidget(
-                                icon: Icons.location_pin,
-                                text: "1.7km",
-                                iconColor: AppColors.mainColor2)),
-                        Expanded(
-                            child: IconAndTextWidget(
-                                icon: Icons.access_time_rounded,
-                                text: "11:00 - 19:30",
-                                iconColor: AppColors.iconColor2),),
+                        SmallText(text: service.stars.toString(), size: Dimensions.height20),
 
+
+                      ],
+
+                    ),
+                    SizedBox(height: Dimensions.height15,),
+                    Row(
+                      children: [
+                        SmallText(text: service.doctor!, size: Dimensions.height20,),
                       ],
                     )
                   ],

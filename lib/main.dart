@@ -1,3 +1,4 @@
+import 'package:clinic_app/home/login_page.dart';
 import 'package:flutter/material.dart';
 import 'home/main_page.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MainPage(),
+      routes: {
+        'MainPage': (context) => const MainPage(),
+      },
+      home: const LoginPage(),
+
     );
   }
 }

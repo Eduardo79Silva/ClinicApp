@@ -1,7 +1,6 @@
 import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:clinic_app/widgets/SideDrawer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
@@ -22,7 +21,7 @@ class AppointmentPage extends StatefulWidget {
 }
 
 class _AppointmentPageState extends State<AppointmentPage> {
-  TextEditingController symptomns = new TextEditingController();
+  TextEditingController symptomns = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,32 +30,32 @@ class _AppointmentPageState extends State<AppointmentPage> {
       body: Column(children: [
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(15),
                 bottomRight: Radius.circular(15)),
             color: Colors.grey[200],
           ),
           child: Container(
             //color: Colors.grey[300],
-            margin: EdgeInsets.only(top: 40, bottom: 20),
-            padding: EdgeInsets.only(left: 20, right: 20),
+            margin: const EdgeInsets.only(top: 40, bottom: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                    onPressed: () => {Navigator.of(context).pop()},
+                    onPressed: () => {Navigator.of(context).popUntil(ModalRoute.withName("MainPage"))},
                     icon: Icon(
                       Icons.close_rounded,
                       color: AppColors.mainColor2,
                     )),
                 Column(
                   children: [
-                    new Container(
+                    Container(
                       height: Dimensions.height20 * 2,
                       width: Dimensions.width20 * 20,
-                      decoration: new BoxDecoration(
-                        image: new DecorationImage(
-                          image: new AssetImage("assets/image/logo.png"),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/image/logo.png"),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -66,7 +65,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 Container(
                   width: 45,
                   height: 45,
-                  child: Icon(
+                  child: const Icon(
                     Icons.search,
                     color: Colors.white,
                   ),
@@ -82,12 +81,12 @@ class _AppointmentPageState extends State<AppointmentPage> {
         SizedBox(
           height: Dimensions.height20,
         ),
-        new Container(
+        Container(
           height: Dimensions.height20 * 1.2,
           width: Dimensions.width20 * 25,
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage("assets/image/StepProgress1.png"),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/image/StepProgress1.png"),
               fit: BoxFit.contain,
             ),
           ),
@@ -125,7 +124,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
             controller: symptomns,
             textInputAction: TextInputAction.go,
             maxLines: 7 * 24,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: "Diga-nos como se sente",
             ),
@@ -139,7 +138,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 color: AppColors.mainColor2.withOpacity(0.6),
                 spreadRadius: 4,
                 blurRadius: 50,
-                offset: Offset(0, 2),
+                offset: const Offset(0, 2),
               )
             ],
           ),
@@ -154,20 +153,20 @@ class _AppointmentPageState extends State<AppointmentPage> {
                       shape: RoundedRectangleBorder(
                           //to set border radius to button
                           borderRadius: BorderRadius.circular(50)),
-                      padding: EdgeInsets.all(5) //content padding inside button
+                      padding: const EdgeInsets.all(5) //content padding inside button
                       ),
                   onPressed: () {
                     !widget.hasService ? Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AppointmentPage2())) :
+                        MaterialPageRoute(builder: (context) => const AppointmentPage2())) :
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AppointmentPage3()));
+                        MaterialPageRoute(builder: (context) => const AppointmentPage3()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
                         "Seguinte",
                         style: TextStyle(
