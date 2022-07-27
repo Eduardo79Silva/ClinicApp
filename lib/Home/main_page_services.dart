@@ -26,7 +26,7 @@ class _ServicesBodyState extends State<ServicesBody> {
   List<Service> services = [new Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg", stars: 5, doctor: "Fisioterapeuta Carina"),
                             new Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg", stars: 3, doctor: "Dr. Alex"),
                             new Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg", stars: 3, doctor: "Dr. Pedro"),
-                            new Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg", stars: 4, doctor: "Dra. Liliana"),
+                            new Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg", stars: 4, doctor: "Dra. Isabela"),
                             new Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg", stars: 5, doctor: "Dra. Bruna")];
 
 

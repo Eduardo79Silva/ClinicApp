@@ -1,20 +1,28 @@
-
 import 'dart:ui';
+import 'package:clinic_app/Utils/colors.dart';
 import 'package:clinic_app/Utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomDialogBox extends StatefulWidget {
-  final String title, descriptions, text;
-  final Image img;
+import '../Services/auth.dart';
 
-  const CustomDialogBox({Key? key, required this.title, required this.descriptions, required this.text, required this.img}) : super(key: key);
+class PopUp extends StatefulWidget {
+  final String title, descriptions, text;
+
+  const PopUp(
+      {Key? key,
+      required this.title,
+      required this.descriptions,
+      required this.text})
+      : super(key: key);
 
   @override
-  _CustomDialogBoxState createState() => _CustomDialogBoxState();
+  _PopUpState createState() => _PopUpState();
 }
 
-class _CustomDialogBoxState extends State<CustomDialogBox> {
+class _PopUpState extends State<PopUp> {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -26,38 +34,65 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
       child: contentBox(context),
     );
   }
-  contentBox(context){
+
+  contentBox(context) {
     return Stack(
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: Dimensions.height20,top: Dimensions.height15 *3
-              + Dimensions.height20, right: Dimensions.height20,bottom: Dimensions.height20
-          ),
-          margin: EdgeInsets.only(top: Dimensions.height15 *3),
+          padding: EdgeInsets.only(
+              left: Dimensions.height20,
+              top: Dimensions.height15 * 3 + Dimensions.height20,
+              right: Dimensions.height20,
+              bottom: Dimensions.height20),
+          margin: EdgeInsets.only(top: Dimensions.height15 * 3),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: Colors.white,
               borderRadius: BorderRadius.circular(Dimensions.height20),
               boxShadow: [
-                BoxShadow(color: Colors.black,offset: Offset(0,10),
-                    blurRadius: 10
-                ),
-              ]
-          ),
+                BoxShadow(
+                    color: Colors.grey[900]!.withOpacity(.2), offset: const Offset(0, 10), blurRadius: 10, ),
+              ]),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(widget.title,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
-              SizedBox(height: 15,),
-              Text(widget.descriptions,style: TextStyle(fontSize: 14),textAlign: TextAlign.center,),
-              SizedBox(height: 22,),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(widget.text,style: TextStyle(fontSize: 18),)),
+              Text(
+                widget.title,
+                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                widget.descriptions,
+                style: const TextStyle(fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 22,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                      onPressed: () async {
+                        await _auth.signOut();
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        widget.text,
+                        style: const TextStyle(fontSize: 18, color: Colors.redAccent),
+                      )),
+                  TextButton(
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'Nao',
+                        style: TextStyle(
+                            fontSize: 18, color: AppColors.mainColor2),
+                      )),
+                ],
               ),
             ],
           ),
@@ -67,11 +102,11 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
           right: Dimensions.height20,
           child: CircleAvatar(
             backgroundColor: Colors.transparent,
-            radius: Dimensions.height15 *3,
+            radius: Dimensions.height15 * 3,
             child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(Dimensions.height15 *3)),
-                child: Image.asset("assets/image/logo.png")
-            ),
+                borderRadius:
+                    BorderRadius.all(Radius.circular(Dimensions.height15 * 3)),
+                child: const Center()),
           ),
         ),
       ],

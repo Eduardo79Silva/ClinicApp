@@ -1,12 +1,18 @@
 import 'package:clinic_app/Services/auth.dart';
+import 'package:clinic_app/Widgets/popup.dart';
 import 'package:clinic_app/home/appointment_page_1.dart';
 import 'package:clinic_app/utils/colors.dart';
 import 'package:clinic_app/utils/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
-class SideDrawer extends StatelessWidget {
+class SideDrawer extends StatefulWidget {
 
-  final AuthService _auth = AuthService();
+  @override
+  State<SideDrawer> createState() => _SideDrawerState();
+}
+
+class _SideDrawerState extends State<SideDrawer> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +20,11 @@ class SideDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           DrawerHeader(
-            child: Center(
-              child: Text(
-                'Clínica Hora Sã',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-            ),
+            child: Center(),
             decoration: BoxDecoration(
-              color: AppColors.mainColor2,
+              image: DecorationImage(image: AssetImage("assets/image/logo.png"),
+                  fit: BoxFit.fitWidth),
+              color: AppColors.buttonBackgroundColor,
             ),
           ),
           ListTile(
@@ -37,9 +39,10 @@ class SideDrawer extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AppointmentPage(
-                            hasService: false,
-                          )),
+                      builder: (context) =>
+                      const AppointmentPage(
+                        hasService: false,
+                      )),
                 );
               }),
           ListTile(
@@ -48,11 +51,22 @@ class SideDrawer extends StatelessWidget {
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Terminar Sessão'),
-            onTap: () async {
-              await _auth.signOut();
-            },
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Terminar Sessão'),
+              /*onTap: () async {
+               await _auth.signOut();
+             },*/
+              onTap: () {
+                showDialog(context: context,
+                    builder: (BuildContext context){
+                      return PopUp(
+                        title: "Encerrar Sessao",
+                        descriptions: "Tem a certeza que pretende encerrar a sua sessao?",
+                        text: "Sim",
+                      );
+                    }
+                );
+              }
           ),
         ],
       ),

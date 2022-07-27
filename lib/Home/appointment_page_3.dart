@@ -48,7 +48,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                   IconButton(
                       onPressed: () => {
                             Navigator.popUntil(
-                                context, ModalRoute.withName('MainPage'))
+                                context, ModalRoute.withName('/'))
                           },
                       icon: Icon(
                         Icons.close_rounded,
@@ -243,7 +243,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                         padding: const EdgeInsets.all(
                             5) //content padding inside button
                         ),
-                    onPressed: () => {Navigator.of(context).popUntil(ModalRoute.withName("MainPage"))},
+                    onPressed: () => {Navigator.of(context).popUntil(ModalRoute.withName("/"))},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,

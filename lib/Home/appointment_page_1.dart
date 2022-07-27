@@ -43,7 +43,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                    onPressed: () => {Navigator.of(context).popUntil(ModalRoute.withName("MainPage"))},
+                    onPressed: () => {Navigator.of(context).pop()},
                     icon: Icon(
                       Icons.close_rounded,
                       color: AppColors.mainColor2,

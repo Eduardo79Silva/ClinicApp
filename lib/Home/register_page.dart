@@ -17,10 +17,12 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
   String nome = '';
+  String error = '';
 
 
   dynamic result;
@@ -65,11 +67,12 @@ class _RegisterPageState extends State<RegisterPage> {
             labelText: 'Email',
             floatingLabelAlignment: FloatingLabelAlignment.center,
             labelStyle: TextStyle(color: AppColors.mainColor2),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            contentPadding: EdgeInsets.symmetric(horizontal: Dimensions.width20*2, vertical: Dimensions.height15),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             )
         ),
+        validator: (val) => val!.isEmpty ? 'Coloque um email' : null,
         onChanged: (val){
           setState(() {
             email=val;
@@ -85,11 +88,12 @@ class _RegisterPageState extends State<RegisterPage> {
             labelText: 'Nome',
             floatingLabelAlignment: FloatingLabelAlignment.center,
             labelStyle: TextStyle(color: AppColors.mainColor2),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            contentPadding: EdgeInsets.symmetric(horizontal: Dimensions.width20*2, vertical: Dimensions.height15),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             )
         ),
+        validator: (val) => val!.isEmpty ? 'Coloque o seu nome' : null,
         onChanged: (val){
           setState(() {
             email=val;
@@ -123,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
               color: Color.fromARGB(255, 169, 47, 26),
             )),
         inputDecoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          contentPadding: EdgeInsets.symmetric(horizontal: Dimensions.width20*2, vertical: Dimensions.height15),
           labelText: 'Número de telemóvel',
           floatingLabelAlignment: FloatingLabelAlignment.center,
           labelStyle: TextStyle(color: AppColors.mainColor2),
@@ -139,6 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Color.fromARGB(255, 169, 47, 26),
               )),
         ),
+        errorMessage: 'Número inválido',
         onSaved: (PhoneNumber number) {
           print('On Saved: $number');
         },
@@ -153,11 +158,35 @@ class _RegisterPageState extends State<RegisterPage> {
             labelText: 'Palavra-passe',
             floatingLabelAlignment: FloatingLabelAlignment.center,
             labelStyle: TextStyle(color: AppColors.mainColor2),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            contentPadding: EdgeInsets.symmetric(horizontal: Dimensions.width20*2, vertical: Dimensions.height15),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             )
         ),
+        validator: (val) => val!.length < 6 ? 'A sua palavra-passe tem de ter pelo menos 6 caracteres' : null,
+        onChanged: (val) {
+          setState(() {
+            password=val;
+          });
+        },
+      ),
+    );
+
+    final inputPassword2 = Padding(
+      padding: EdgeInsets.only(bottom: Dimensions.height20),
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        obscureText: true,
+        decoration: InputDecoration(
+            labelText: 'Confirmar Palavra-passe',
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            labelStyle: TextStyle(color: AppColors.mainColor2),
+            contentPadding:  EdgeInsets.symmetric(horizontal: Dimensions.width20*2, vertical: Dimensions.height15),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50.0)
+            )
+        ),
+        validator: (val) => val != password ? 'As palavras-passe não correspondem.' : null,
         onChanged: (val) {
           setState(() {
             password=val;
@@ -185,15 +214,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.all(5) //content padding inside button
             ),
             onPressed: () async {
-              print(email);
-              print(password);
-              /*result = await _auth.signInAnon();
-              if(result==null){
-                print('error');
-              }
-              else{
-                print(result.uid);
-              }*/
+             if(_formKey.currentState!.validate()){
+               dynamic result = await _auth.registerEmailPassword(email, password);
+               if(result == null){
+                 setState(() {
+                   error = 'Por favor forneca um email valido';
+                 });
+               }
+             }
             },
           ),
         ),
@@ -211,6 +239,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
     return SafeArea(
         child: Form(
+          key: _formKey,
           child: Scaffold(
             body: Center(
               child: ListView(
@@ -219,14 +248,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: <Widget>[
                   logo,
                   SizedBox(height: Dimensions.height10,),
+                  inputName,
                   inputEmail,
                   inputPassword,
-                  inputName,
+                  inputPassword2,
                   inputPhoneNumber,
                   SizedBox(height: Dimensions.height20*3.5,),
                   buttonLogin,
                   SizedBox(height: Dimensions.height15,),
                   buttonForgotPassword
+
                 ],
               ),
             ),
