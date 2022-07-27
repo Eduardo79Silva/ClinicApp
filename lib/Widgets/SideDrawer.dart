@@ -1,9 +1,13 @@
+import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/home/appointment_page_1.dart';
 import 'package:clinic_app/utils/colors.dart';
 import 'package:clinic_app/utils/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
 class SideDrawer extends StatelessWidget {
+
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -46,7 +50,9 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Terminar Sessão'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () async {
+              await _auth.signOut();
+            },
           ),
         ],
       ),
