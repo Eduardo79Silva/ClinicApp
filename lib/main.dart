@@ -1,11 +1,20 @@
+import 'package:clinic_app/Home/wrapper.dart';
 import 'package:clinic_app/home/login_page.dart';
 import 'package:flutter/material.dart';
 import 'home/main_page.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+  //initilization of Firebase app
+
+  // other Firebase service initialization
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'MainPage': (context) => const MainPage(),
       },
-      home: const LoginPage(),
+      home: const Wrapper(),
 
     );
   }

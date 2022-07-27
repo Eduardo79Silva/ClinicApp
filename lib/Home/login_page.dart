@@ -1,3 +1,4 @@
+import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/home/main_page.dart';
 import 'package:clinic_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,10 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 class _LoginPageState extends State<LoginPage> {
+
+  final AuthService _auth = AuthService();
+
+  dynamic result;
   @override
   Widget build(BuildContext context) {
     final logo = Padding(
@@ -69,15 +74,21 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(50)),
                 padding: EdgeInsets.all(5) //content padding inside button
             ),
-            onPressed: () => {
-              Navigator.pushNamed(context, 'MainPage')
+            onPressed: () async {
+              result = await _auth.signInAnon();
+              if(result==null){
+                print('error');
+              }
+              else{
+                print(result.uid);
+              }
             },
           ),
         ),
       ),
     );
     final buttonForgotPassword = const TextButton(
-        child: const Text('Forgot Password', style: const TextStyle(color: Colors.grey, fontSize: 16),),
+        child: const Text('Forgot Password?', style: const TextStyle(color: Colors.grey, fontSize: 16),),
         onPressed: null
     );
     return SafeArea(
