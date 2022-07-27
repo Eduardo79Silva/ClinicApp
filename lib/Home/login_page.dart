@@ -1,6 +1,7 @@
+import 'package:clinic_app/Home/register_page.dart';
 import 'package:clinic_app/Services/auth.dart';
-import 'package:clinic_app/home/main_page.dart';
-import 'package:clinic_app/utils/dimensions.dart';
+import 'package:clinic_app/Utils/dimensions.dart';
+import 'package:clinic_app/Home/main_page.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
@@ -15,6 +16,9 @@ class _LoginPageState extends State<LoginPage> {
 
   final AuthService _auth = AuthService();
 
+  String email = '';
+  String password = '';
+
   dynamic result;
   @override
   Widget build(BuildContext context) {
@@ -24,35 +28,50 @@ class _LoginPageState extends State<LoginPage> {
           tag: 'hero',
           child: CircleAvatar(
             radius: 56.0,
-            child: Image.asset('assets/image/fisioterapia.jpg'),
+            child: Image.asset('assets/image/logo.png'),
+            backgroundColor: Colors.transparent,
           )
       ),
     );
     final inputEmail = Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: TextField(
+      child: TextFormField(
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-            hintText: 'Email',
+            labelText: 'Email',
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            labelStyle: TextStyle(color: AppColors.mainColor2),
             contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             )
         ),
+        onChanged: (val){
+          setState(() {
+            email=val;
+          });
+        },
       ),
     );
     final inputPassword = Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: TextField(
+      child: TextFormField(
         keyboardType: TextInputType.emailAddress,
         obscureText: true,
         decoration: InputDecoration(
-            hintText: 'Password',
+            labelText: 'Palavra-passe',
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            labelStyle: TextStyle(color: AppColors.mainColor2),
             contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0)
             )
         ),
+        onChanged: (val) {
+          setState(() {
+            password=val;
+          });
+        },
       ),
     );
 
@@ -64,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           height: Dimensions.height10 * 6, //height of button
           width: Dimensions.width20 * 17, //width of button
           child: ElevatedButton(
-            child: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 18)),
+            child: const Text('Entrar', style: TextStyle(color: Colors.white, fontSize: 18)),
             style: ElevatedButton.styleFrom(
                 elevation: 7,
                 primary: AppColors.mainColor2, //background color of button
@@ -75,6 +94,8 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(5) //content padding inside button
             ),
             onPressed: () async {
+              print(email);
+              print(password);
               result = await _auth.signInAnon();
               if(result==null){
                 print('error');
@@ -87,25 +108,35 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-    final buttonForgotPassword = const TextButton(
-        child: const Text('Forgot Password?', style: const TextStyle(color: Colors.grey, fontSize: 16),),
-        onPressed: null
+
+    final buttonForgotPassword =  TextButton(
+        child: const Text('Criar Conta', style: TextStyle(color: Colors.grey, fontSize: 20),),
+        onPressed:  () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const RegisterPage()),
+          );
+        }
     );
     return SafeArea(
-        child: Scaffold(
-          body: Center(
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: <Widget>[
-                logo,
-                SizedBox(height: Dimensions.height20*4,),
-                inputEmail,
-                inputPassword,
-                SizedBox(height: Dimensions.height20*5,),
-                buttonLogin,
-                buttonForgotPassword
-              ],
+        child: Form(
+          child: Scaffold(
+            body: Center(
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                children: <Widget>[
+                  logo,
+                  SizedBox(height: Dimensions.height20*4,),
+                  inputEmail,
+                  inputPassword,
+                  SizedBox(height: Dimensions.height20*5,),
+                  buttonLogin,
+                  SizedBox(height: Dimensions.height15,),
+                  buttonForgotPassword
+                ],
+              ),
             ),
           ),
         )
