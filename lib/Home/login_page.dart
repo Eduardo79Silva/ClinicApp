@@ -2,12 +2,15 @@ import 'package:clinic_app/Home/register_page.dart';
 import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/Utils/dimensions.dart';
 import 'package:clinic_app/Home/main_page.dart';
+import 'package:clinic_app/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+
+  final Function toggle;
+  const LoginPage({Key? key, required this.toggle}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -15,9 +18,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
+  String error = '';
 
   dynamic result;
   @override
@@ -46,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(50.0)
             )
         ),
+        validator: (val) => val!.isEmpty ? 'Coloque um email' : null,
         onChanged: (val){
           setState(() {
             email=val;
@@ -67,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(50.0)
             )
         ),
+        validator: (val) => val!.length < 6 ? 'A sua palavra-passe tem de ter pelo menos 6 caracteres' : null,
         onChanged: (val) {
           setState(() {
             password=val;
@@ -74,7 +82,6 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
     );
-
     final buttonLogin = Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: ButtonTheme(
@@ -94,33 +101,33 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(5) //content padding inside button
             ),
             onPressed: () async {
-              print(email);
-              print(password);
-              result = await _auth.signInAnon();
-              if(result==null){
-                print('error');
-              }
-              else{
-                print(result.uid);
+              if(_formKey.currentState!.validate()){
+                setState(() {
+                  loading = true;
+                });
+                dynamic result = await _auth.signIn(email, password);
+
+                if(result == null){
+                  setState(() {
+                    error = 'Não foi possível entrar com essas credenciais.';
+                    loading = false;
+                  });
+                }
               }
             },
           ),
         ),
       ),
     );
-
     final buttonForgotPassword =  TextButton(
         child: const Text('Criar Conta', style: TextStyle(color: Colors.grey, fontSize: 20),),
         onPressed:  () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const RegisterPage()),
-          );
+          widget.toggle();
         }
     );
-    return SafeArea(
+    return loading ? Loading() : SafeArea(
         child: Form(
+          key: _formKey,
           child: Scaffold(
             body: Center(
               child: ListView(
@@ -131,7 +138,13 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: Dimensions.height20*4,),
                   inputEmail,
                   inputPassword,
-                  SizedBox(height: Dimensions.height20*5,),
+                  SizedBox(height: Dimensions.height20*2.5,),
+                  Center(
+                    child: Text(
+                        error, style: TextStyle(color: Colors.red, fontSize: 14,)
+                    ),
+                  ),
+                  SizedBox(height: Dimensions.height20*2.5,),
                   buttonLogin,
                   SizedBox(height: Dimensions.height15,),
                   buttonForgotPassword

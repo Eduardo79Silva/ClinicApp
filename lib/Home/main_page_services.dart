@@ -23,11 +23,11 @@ class _ServicesBodyState extends State<ServicesBody> {
   var _currPageValue = 0.0;
   var _height = Dimensions.pageViewContainer;
   double _scaleFactor = 0.8;
-  List<Service> services = [new Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg", stars: 5, doctor: "Fisioterapeuta Carina"),
-                            new Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg", stars: 3, doctor: "Dr. Alex"),
-                            new Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg", stars: 3, doctor: "Dr. Pedro"),
-                            new Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg", stars: 4, doctor: "Dra. Isabela"),
-                            new Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg", stars: 5, doctor: "Dra. Bruna")];
+  List<Service> services = [Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg", stars: 5, doctor: "Fisioterapeuta Carina"),
+                            Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg", stars: 4, doctor: "3 Doutores disponíveis"),
+                            Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg", stars: 5, doctor: "Dr. Pedro"),
+                            Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg", stars: 5, doctor: "Dra. Isabela"),
+                            Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg", stars: 4, doctor: "Dra. Bruna")];
 
 
   @override
@@ -74,7 +74,7 @@ class _ServicesBodyState extends State<ServicesBody> {
   }
 
   Widget _builderPageItem(int index, Service service) {
-    Matrix4 matrix = new Matrix4.identity();
+    Matrix4 matrix = Matrix4.identity();
 
     if(index == _currPageValue.floor()){
       var currScale = 1-(_currPageValue-index)*(1-_scaleFactor);

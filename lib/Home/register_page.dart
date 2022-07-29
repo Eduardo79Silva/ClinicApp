@@ -1,6 +1,7 @@
 import 'package:clinic_app/Home/login_page.dart';
 import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/Utils/colors.dart';
+import 'package:clinic_app/Widgets/loading.dart';
 import 'package:clinic_app/home/main_page.dart';
 import 'package:clinic_app/Utils/dimensions.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,9 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+
+  final Function toggle;
+  const RegisterPage({Key? key, required this.toggle}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -18,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
@@ -171,7 +175,6 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       ),
     );
-
     final inputPassword2 = Padding(
       padding: EdgeInsets.only(bottom: Dimensions.height20),
       child: TextFormField(
@@ -194,7 +197,6 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       ),
     );
-
     final buttonLogin = Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: ButtonTheme(
@@ -215,10 +217,14 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             onPressed: () async {
              if(_formKey.currentState!.validate()){
+               setState(() {
+                 loading = true;
+               });
                dynamic result = await _auth.registerEmailPassword(email, password);
                if(result == null){
                  setState(() {
                    error = 'Por favor forneca um email valido';
+                   loading = false;
                  });
                }
              }
@@ -230,14 +236,10 @@ class _RegisterPageState extends State<RegisterPage> {
     final buttonForgotPassword =  TextButton(
         child: const Text('Já tem uma conta?', style: TextStyle(color: Colors.grey, fontSize: 16),),
         onPressed:  () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const LoginPage()),
-          );
+          widget.toggle();
         }
     );
-    return SafeArea(
+    return loading ? Loading() : SafeArea(
         child: Form(
           key: _formKey,
           child: Scaffold(
@@ -253,7 +255,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   inputPassword,
                   inputPassword2,
                   inputPhoneNumber,
-                  SizedBox(height: Dimensions.height20*3.5,),
+                  SizedBox(height: Dimensions.height20*1.75,),
+                  Center(
+                    child: Text(
+                        error, style: TextStyle(color: Colors.red, fontSize: 14,)
+                    ),
+                  ),
+                  SizedBox(height: Dimensions.height20*1.75,),
                   buttonLogin,
                   SizedBox(height: Dimensions.height15,),
                   buttonForgotPassword

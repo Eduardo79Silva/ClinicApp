@@ -1,3 +1,4 @@
+import 'package:clinic_app/Home/authenticate.dart';
 import 'package:clinic_app/Home/login_page.dart';
 import 'package:clinic_app/Home/main_page.dart';
 import 'package:clinic_app/Utils/user.dart';
@@ -15,7 +16,7 @@ class Wrapper extends StatelessWidget {
     print(user);
 
     if(user == null){
-      return const LoginPage();
+      return const Authenticate();
     }
     else{
       return const MainPage();
