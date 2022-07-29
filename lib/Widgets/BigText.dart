@@ -1,3 +1,4 @@
+import 'package:clinic_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class BigText extends StatelessWidget {
@@ -5,9 +6,10 @@ class BigText extends StatelessWidget {
   final String text;
   double size;
   TextOverflow overFlow;
-  BigText({Key? key, this.color, required this.text,
-  this.size=20,
-  this.overFlow=TextOverflow.fade}) : super(key: key);
+  FontWeight weight;
+  BigText({Key? key, this.color = const Color(0xFF332d2b), required this.text,
+  this.size= 20,
+  this.overFlow=TextOverflow.fade, this.weight=FontWeight.w400}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class BigText extends StatelessWidget {
         fontSize: size,
         overflow: overFlow,
         fontFamily: 'Roboto',
-        fontWeight: FontWeight.w400
+        fontWeight: weight
       ),
     );
   }
