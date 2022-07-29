@@ -1,5 +1,6 @@
 import 'package:clinic_app/Services/database.dart';
 import 'package:clinic_app/Utils/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class AuthService{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? u = result.user;
       
-      await DatabaseService(uid: u!.uid).addAppointment('Dentista', DateTime.now(), '16:30');
+      await DatabaseService(uid: u!.uid).addAppointment('Dentista', Timestamp.fromDate(DateTime.now()), '16:30');
       return _userFromFirebaseUser(u);
     }
     catch(e){

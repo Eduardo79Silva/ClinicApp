@@ -58,17 +58,17 @@ class _AppointmentPageState extends State<AppointmentPage> {
                     ),
                   ],
                 ),
-                Container(
+                const SizedBox(
                   width: 45,
                   height: 45,
-                  child: const Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: AppColors.mainColor2,
-                  ),
+                  child: Center(),
+                  // Icon(Icons.search, color: Colors.white,),
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(15.0),
+                  //   color: AppColors.mainColor2,
+                  //
+                  // ),
+
                 )
               ],
             ),

@@ -1,4 +1,5 @@
 
+import 'package:clinic_app/Utils/user.dart';
 import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:clinic_app/widgets/SideDrawer.dart';
@@ -30,7 +31,7 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Appointment>?>.value(
-      initialData: [],
+      initialData: null,
       value: DatabaseService().userAppointments,
       child: Scaffold(
         key: _scaffoldKey,
