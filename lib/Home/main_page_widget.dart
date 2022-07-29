@@ -21,7 +21,7 @@ class _WidgetsWindowsState extends State<WidgetsWindows> {
       alignment: Alignment.bottomCenter,
       child: Container(
         height: Dimensions.pageViewTextContainer,
-        margin: EdgeInsets.only(left: 30, right: 30, bottom: 25),
+        margin: const EdgeInsets.only(left: 30, right: 30, bottom: 25),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.white,
@@ -42,7 +42,7 @@ class _WidgetsWindowsState extends State<WidgetsWindows> {
             ]
         ),
         child: Container(
-          padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+          padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

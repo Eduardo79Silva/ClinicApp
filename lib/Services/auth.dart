@@ -1,3 +1,4 @@
+import 'package:clinic_app/Services/database.dart';
 import 'package:clinic_app/Utils/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class AuthService{
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
 
+
   //sign in anon
   Future signInAnon() async{
     try{
@@ -25,6 +27,10 @@ class AuthService{
       print(e.toString());
       return null;
     }
+  }
+
+  String get userId {
+    return _auth.currentUser!.uid;
   }
 
   // sign in with email and pass
@@ -45,6 +51,8 @@ class AuthService{
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? u = result.user;
+      
+      await DatabaseService(uid: u!.uid).addAppointment('Dentista', DateTime.now(), '16:30');
       return _userFromFirebaseUser(u);
     }
     catch(e){

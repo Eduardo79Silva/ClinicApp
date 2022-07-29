@@ -1,7 +1,5 @@
-import 'package:clinic_app/Home/register_page.dart';
 import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/Utils/dimensions.dart';
-import 'package:clinic_app/Home/main_page.dart';
 import 'package:clinic_app/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                 shape: RoundedRectangleBorder(
                   //to set border radius to button
                     borderRadius: BorderRadius.circular(50)),
-                padding: EdgeInsets.all(5) //content padding inside button
+                padding: const EdgeInsets.all(5) //content padding inside button
             ),
             onPressed: () async {
               if(_formKey.currentState!.validate()){
@@ -141,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: Dimensions.height20*2.5,),
                   Center(
                     child: Text(
-                        error, style: TextStyle(color: Colors.red, fontSize: 14,)
+                        error, style: const TextStyle(color: Colors.red, fontSize: 14,)
                     ),
                   ),
                   SizedBox(height: Dimensions.height20*2.5,),

@@ -1,7 +1,6 @@
 import 'package:clinic_app/utils/colors.dart';
 import 'package:clinic_app/utils/dimensions.dart';
 import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/IconsText.dart';
 import 'package:clinic_app/widgets/Service.dart';
 import 'package:clinic_app/widgets/SmallText.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -21,8 +20,8 @@ class ServicesBody extends StatefulWidget {
 class _ServicesBodyState extends State<ServicesBody> {
   PageController pageController = PageController(viewportFraction: 0.8);
   var _currPageValue = 0.0;
-  var _height = Dimensions.pageViewContainer;
-  double _scaleFactor = 0.8;
+  final _height = Dimensions.pageViewContainer;
+  final double _scaleFactor = 0.8;
   List<Service> services = [Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg", stars: 5, doctor: "Fisioterapeuta Carina"),
                             Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg", stars: 4, doctor: "3 Doutores disponíveis"),
                             Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg", stars: 5, doctor: "Dr. Pedro"),
@@ -40,16 +39,16 @@ class _ServicesBodyState extends State<ServicesBody> {
     });
   }
 
-  @override
-  void dispose() {
-    pageController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   pageController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
@@ -103,14 +102,14 @@ class _ServicesBodyState extends State<ServicesBody> {
             context,
             MaterialPageRoute(builder: (context) => AppointmentPage(hasService: true, service: service.name,))) : Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AppointmentPage3()));},
+            MaterialPageRoute(builder: (context) => const AppointmentPage3()));},
         child: Stack(children: [
           Container(
             height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(left: 10, right: 10),
+            margin: const EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
+                color: index.isEven ? const Color(0xFF69c5df) : const Color(0xFF9294cc),
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(service.img!))),
@@ -119,7 +118,7 @@ class _ServicesBodyState extends State<ServicesBody> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: Dimensions.pageViewTextContainer,
-              margin: EdgeInsets.only(left: 30, right: 30, bottom: 25),
+              margin: const EdgeInsets.only(left: 30, right: 30, bottom: 25),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,

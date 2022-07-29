@@ -1,6 +1,4 @@
-import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/SideDrawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -9,7 +7,6 @@ import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 import '../widgets/IconsText.dart';
 import '../widgets/SmallText.dart';
-import 'main_page_widget.dart';
 
 class AppointmentPage3 extends StatefulWidget {
   const AppointmentPage3({Key? key}) : super(key: key);
@@ -142,9 +139,9 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
               lastDay: DateTime.utc(2030, 3, 14),
               focusedDay: DateTime.now(),
               calendarStyle: CalendarStyle(
-                defaultTextStyle: TextStyle(fontSize: 17),
+                defaultTextStyle: const TextStyle(fontSize: 17),
                 rangeHighlightColor: AppColors.mainColor,
-                todayTextStyle: TextStyle(color: Colors.white, fontSize: 17),
+                todayTextStyle: const TextStyle(color: Colors.white, fontSize: 17),
                 todayDecoration: BoxDecoration(
                   color: AppColors.mainColor2.withOpacity(0.5),
                   shape: BoxShape.circle,
@@ -182,7 +179,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
               ),
               RadioListTile(
                   activeColor: AppColors.mainColor2,
-                  visualDensity: VisualDensity(vertical: 0.1),
+                  visualDensity: const VisualDensity(vertical: 0.1),
                   title: const Text("10:30"),
                   value: '10:30',
                   groupValue: _res,
@@ -193,7 +190,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                   }),
               RadioListTile(
                   activeColor: AppColors.mainColor2,
-                  visualDensity: VisualDensity(vertical: 0.1),
+                  visualDensity: const VisualDensity(vertical: 0.1),
                   title: const Text("11:00"),
                   value: '11:00',
                   groupValue: _res,
@@ -204,7 +201,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                   }),
               RadioListTile(
                   activeColor: AppColors.mainColor2,
-                  visualDensity: VisualDensity(vertical: 0.1),
+                  visualDensity: const VisualDensity(vertical: 0.1),
                   title: const Text("11:30"),
                   value: '11:30',
                   groupValue: _res,
@@ -215,7 +212,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                   }),
               RadioListTile(
                 activeColor: AppColors.mainColor2,
-                  visualDensity: VisualDensity(vertical: 0.1),
+                  visualDensity: const VisualDensity(vertical: 0.1),
                   title: const Text("12:00"),
                   value: '12:00',
                   groupValue: _res,

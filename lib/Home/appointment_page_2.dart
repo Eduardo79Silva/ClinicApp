@@ -1,14 +1,11 @@
 import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/SideDrawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
-import '../widgets/IconsText.dart';
 import '../widgets/SmallText.dart';
-import 'main_page_widget.dart';
 
 class AppointmentPage2 extends StatefulWidget {
   const AppointmentPage2({Key? key}) : super(key: key);
@@ -35,8 +32,8 @@ class _AppointmentPageState2 extends State<AppointmentPage2> {
             ),
             child: Container(
               //color: Colors.grey[300],
-              margin: EdgeInsets.only(top: 40, bottom: 20),
-              padding: EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(top: 40, bottom: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -114,7 +111,7 @@ class _AppointmentPageState2 extends State<AppointmentPage2> {
                 )),
           ),
           SizedBox(height: Dimensions.height20 * 4),
-          ServicesBody(mainPage: false),
+          const ServicesBody(mainPage: false),
         ]),
       ),
     );

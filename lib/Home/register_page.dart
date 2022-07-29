@@ -1,8 +1,6 @@
-import 'package:clinic_app/Home/login_page.dart';
 import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/Utils/colors.dart';
 import 'package:clinic_app/Widgets/loading.dart';
-import 'package:clinic_app/home/main_page.dart';
 import 'package:clinic_app/Utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -106,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
     final inputPhoneNumber =   Padding(
-      padding:  EdgeInsets.only(top: 0),
+      padding:  const EdgeInsets.only(top: 0),
       child: InternationalPhoneNumberInput(
         onInputChanged: (PhoneNumber number) {
           print(number.phoneNumber);
@@ -258,7 +256,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(height: Dimensions.height20*1.75,),
                   Center(
                     child: Text(
-                        error, style: TextStyle(color: Colors.red, fontSize: 14,)
+                        error, style: const TextStyle(color: Colors.red, fontSize: 14,)
                     ),
                   ),
                   SizedBox(height: Dimensions.height20*1.75,),

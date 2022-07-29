@@ -1,15 +1,11 @@
-import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/SideDrawer.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
-import '../widgets/IconsText.dart';
 import '../widgets/SmallText.dart';
 import 'appointment_page_2.dart';
 import 'appointment_page_3.dart';
-import 'main_page_widget.dart';
 
 class AppointmentPage extends StatefulWidget {
   final bool hasService;

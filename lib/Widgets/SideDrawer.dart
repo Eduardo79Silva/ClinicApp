@@ -47,7 +47,7 @@ class _SideDrawerState extends State<SideDrawer> {
               }),
           ListTile(
             leading: Icon(Icons.all_inbox_rounded),
-            title: Text('Documentos'),
+            title: Text('Documentos (Brevemente)'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(

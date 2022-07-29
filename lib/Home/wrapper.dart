@@ -1,5 +1,5 @@
+import 'package:clinic_app/Home/admin_page.dart';
 import 'package:clinic_app/Home/authenticate.dart';
-import 'package:clinic_app/Home/login_page.dart';
 import 'package:clinic_app/Home/main_page.dart';
 import 'package:clinic_app/Utils/user.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +13,12 @@ class Wrapper extends StatelessWidget {
 
     final user = Provider.of<MyUser?>(context);
 
-    print(user);
 
     if(user == null){
       return const Authenticate();
     }
     else{
-      return const MainPage();
+      return const AdminPage();
     }
   }
 }

@@ -2,14 +2,12 @@
 import 'package:clinic_app/home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:clinic_app/widgets/SideDrawer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 import '../widgets/IconsText.dart';
 import '../widgets/SmallText.dart';
-import 'main_page_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -20,7 +18,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +31,27 @@ class _MainPageState extends State<MainPage> {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
                 color: Colors.grey[200],
               ),
               child: Container(
                 //color: Colors.grey[300],
-                margin: EdgeInsets.only(top: 40, bottom: 20),
-                padding: EdgeInsets.only(left: 20, right: 20),
+                margin: const EdgeInsets.only(top: 40, bottom: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(onPressed: () => _scaffoldKey.currentState?.openDrawer(), icon: Icon(Icons.menu, color: AppColors.mainColor2,)),
                     Column(
-                      children: [new Container(
+                      children: [Container(
                         height: Dimensions.height20*2,
                         width: Dimensions.width20*20,
-                        decoration: new BoxDecoration(
-                          image: new DecorationImage(image: new AssetImage("assets/image/logo.png"), fit: BoxFit.fill,),
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(image: AssetImage("assets/image/logo.png"), fit: BoxFit.fill,),
                         ),
                       ),],
                     ),
-                    Container(
+                    const SizedBox(
                       width: 45,
                       height: 45,
                       child: Center(),
@@ -81,13 +79,13 @@ class _MainPageState extends State<MainPage> {
                   child: SmallText(text: "Marque já a sua consulta",size: 15, color: Colors.grey[500],)),
             ),
             SizedBox(height: Dimensions.height20*2),
-            ServicesBody(mainPage: true,),
+            const ServicesBody(mainPage: true,),
             SizedBox(height: Dimensions.height20*2),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 height: Dimensions.pageViewTextContainer,
-                margin: EdgeInsets.only(left: 30, right: 30, bottom: 25),
+                margin: const EdgeInsets.only(left: 30, right: 30, bottom: 25),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
@@ -108,7 +106,7 @@ class _MainPageState extends State<MainPage> {
                     ]
                 ),
                 child: Container(
-                  padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+                  padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
