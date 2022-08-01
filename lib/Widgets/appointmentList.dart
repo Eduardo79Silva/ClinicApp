@@ -1,5 +1,6 @@
 import 'package:clinic_app/Services/database.dart';
 import 'package:clinic_app/Utils/appointment.dart';
+import 'package:clinic_app/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -18,24 +19,29 @@ class _AppointmentListState extends State<AppointmentList> {
   Widget build(BuildContext context) {
 
     final appointments = Provider.of<List<Appointment>?>(context);
-    appointments!.sort((a, b) {
-      int compare = a.day.compareTo(b.day);
+    if(appointments != null) {
+      appointments.sort((a, b) {
+        int compare = a.day.compareTo(b.day);
 
-      if (compare == 0) {
-        return a.time.compareTo(b.time);
-      } else {
-        return compare;
-      }
-    });
+        if (compare == 0) {
+          return a.time.compareTo(b.time);
+        } else {
+          return compare;
+        }
+      });
 
 
-    return ListView.builder(
-      itemCount: appointments.length,
-      itemBuilder: (context, index) {
-        return AppointmentWidget(appointment: appointments[index]);
-      },
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-    );
+      return ListView.builder(
+        itemCount: appointments.length,
+        itemBuilder: (context, index) {
+          return AppointmentWidget(appointment: appointments[index]);
+        },
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+      );
+    }
+    else{
+      return Center();
+    }
   }
 }

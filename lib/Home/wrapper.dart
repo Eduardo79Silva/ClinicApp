@@ -19,7 +19,7 @@ class Wrapper extends StatelessWidget {
       return const Authenticate();
     }
     else{
-      return const AdminPage();
+      return const MainPage();
     }
   }
 }

@@ -1,8 +1,6 @@
-import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/Utils/appointment.dart';
 import 'package:clinic_app/Utils/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService{
 
@@ -32,6 +30,12 @@ class DatabaseService{
       'admin': admin
     });
 
+  }
+
+  Future deleteAppointment() async {
+    String now = (DateTime.now().hour + DateTime.now().minute).toString();
+    var expired = appointmentCollection.where('dia', isLessThanOrEqualTo: DateTime.now()).where('hora', isLessThanOrEqualTo: now).snapshots();
+    expired.forEach((element) {for (var element1 in element.docs) {print(element1.get('dia'));print(element1.get('hora'));appointmentCollection.doc(element1.id).delete();}});
   }
 
   
@@ -70,6 +74,12 @@ class DatabaseService{
   Stream<List<Appointment>> get userNextAppointment {
     return appointmentCollection.where('uid', isEqualTo: uid).snapshots().map(_appointmentFromSnap);
   }
+
+  Stream<UserData> userByID(String userid) {
+    return userCollection.doc(userid).snapshots().map(_userDataFromSnapshot);
+  }
+
+
 
 
 

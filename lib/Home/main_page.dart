@@ -29,16 +29,13 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<MyUser?>(context);
+    DatabaseService(uid: user!.uid).deleteAppointment();
     return StreamBuilder<UserData>(
-      stream: DatabaseService(uid: user!.uid).userData,
+      stream: DatabaseService(uid: user.uid).userData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
 
           UserData? userData = snapshot.data;
-          print(userData!.uid);
-          print(userData.email);
-          print(userData.name);
-          print(userData.phoneNumbers);
 
           return Scaffold(
             key: _scaffoldKey,
@@ -98,7 +95,7 @@ class _MainPageState extends State<MainPage> {
                     padding: const EdgeInsets.only(left: 30.0),
                     child: Align(alignment: Alignment.centerLeft,
                         child: BigText(
-                          text: "Olá " + userData.name, size: 25, weight: FontWeight.bold,)),
+                          text: "Olá " + userData!.name, size: 25, weight: FontWeight.bold,)),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 30.0, top: 10.0),
