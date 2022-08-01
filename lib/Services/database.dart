@@ -10,8 +10,8 @@ class DatabaseService{
   DatabaseService({this.uid});
 
   // collection reference
-  final CollectionReference appointmentCollection = FirebaseFirestore.instance.collection("appointments")
-  ;
+  final CollectionReference appointmentCollection = FirebaseFirestore.instance.collection("appointments");
+  final CollectionReference userCollection = FirebaseFirestore.instance.collection("users");
 
 
   Future addAppointment(String especialidade, Timestamp dia, String hora) async {
@@ -24,6 +24,16 @@ class DatabaseService{
 
   }
 
+  Future addUser(String name, String email, String phoneNumber, bool admin) async {
+    return await userCollection.doc(uid).set({
+      'name': name,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'admin': admin
+    });
+
+  }
+
   
   List<Appointment> _appointmentFromSnap( QuerySnapshot snapshot){
     return snapshot.docs.map((doc){
@@ -31,14 +41,34 @@ class DatabaseService{
     }).toList();
   }
 
+  Appointment _nextAppointmentFromSnap( DocumentSnapshot snapshot){
+    return Appointment(specialty: snapshot.get('especialidade') ?? '', day: snapshot.get('dia') ?? Timestamp.fromDate(DateTime.now()), time: snapshot.get('hora') ?? '', uid: snapshot.get('uid') ?? '');
+  }
+
+
+
   List<MyUser> _userFromSnap( QuerySnapshot snapshot){
     return snapshot.docs.map((doc){
       return MyUser(uid: doc.id);
     }).toList();
   }
 
-  Stream<List<Appointment>> get userAppointments {
+  UserData _userDataFromSnapshot(DocumentSnapshot doc){
+    return UserData(uid: uid!, name: doc.get('name'), phoneNumbers: doc.get('phoneNumber'), email: doc.get('email'), admin: doc.get('admin'));
+  }
+
+  Stream<List<Appointment>> get allUserAppointments {
     return appointmentCollection.snapshots().map(_appointmentFromSnap);
+  }
+
+  //get user doc stream
+
+  Stream<UserData> get userData {
+    return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  Stream<List<Appointment>> get userNextAppointment {
+    return appointmentCollection.where('uid', isEqualTo: uid).snapshots().map(_appointmentFromSnap);
   }
 
 

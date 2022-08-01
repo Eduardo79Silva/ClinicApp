@@ -1,15 +1,21 @@
+
+import 'package:clinic_app/Services/database.dart';
 import 'package:clinic_app/widgets/BigText.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../Utils/user.dart';
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 import '../widgets/IconsText.dart';
 import '../widgets/SmallText.dart';
 
 class AppointmentPage3 extends StatefulWidget {
-  const AppointmentPage3({Key? key}) : super(key: key);
+  final String service;
+  final String symptomns;
+  const AppointmentPage3({Key? key, required this.service, required this.symptomns}) : super(key: key);
 
   @override
   _AppointmentPageState3 createState() => _AppointmentPageState3();
@@ -19,10 +25,10 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
   TextEditingController symptomns = TextEditingController();
 
   DateTime? _selectedDay;
-  DateTime? _focusedDay;
   var _res;
   @override
   Widget build(BuildContext context) {
+  final user = Provider.of<MyUser?>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey[100],
@@ -135,10 +141,13 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
             child: TableCalendar(
+              locale: 'pt_PT',
               firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.utc(2030, 3, 14),
               focusedDay: DateTime.now(),
+              calendarFormat: CalendarFormat.month,
               calendarStyle: CalendarStyle(
+                canMarkersOverflow: true,
                 defaultTextStyle: const TextStyle(fontSize: 17),
                 rangeHighlightColor: AppColors.mainColor,
                 todayTextStyle: const TextStyle(color: Colors.white, fontSize: 17),
@@ -149,13 +158,17 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                 selectedDecoration: BoxDecoration(
                     color: AppColors.mainColor2, shape: BoxShape.circle),
               ),
+              headerStyle: const HeaderStyle(
+                titleCentered: true,
+                formatButtonVisible: false,
+              ),
               selectedDayPredicate: (day) {
                 return isSameDay(_selectedDay, day);
               },
               onDaySelected: (selectedDay, focusedDay) {
                 setState(() {
                   _selectedDay = selectedDay;
-                  _focusedDay = focusedDay; // update `_focusedDay` here as well
+// update `_focusedDay` here as well
                 });
               },
             ),
@@ -240,7 +253,10 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                         padding: const EdgeInsets.all(
                             5) //content padding inside button
                         ),
-                    onPressed: () => {Navigator.of(context).popUntil(ModalRoute.withName("/"))},
+                    onPressed: () async {
+                      DatabaseService(uid: user!.uid).addAppointment(widget.service, Timestamp.fromDate(_selectedDay!), _res);
+                      Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,

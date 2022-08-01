@@ -3,6 +3,7 @@ import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/Utils/user.dart';
 import 'package:clinic_app/home/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'home/main_page.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ void main() async {
 
   // other Firebase service initialization
 
-  runApp(MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {

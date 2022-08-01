@@ -18,6 +18,7 @@ class AppointmentPage extends StatefulWidget {
 
 class _AppointmentPageState extends State<AppointmentPage> {
   TextEditingController symptomns = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,10 +155,10 @@ class _AppointmentPageState extends State<AppointmentPage> {
                   onPressed: () {
                     !widget.hasService ? Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const AppointmentPage2())) :
+                        MaterialPageRoute(builder: (context) => AppointmentPage2(symptomns: symptomns.text,))) :
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const AppointmentPage3()));
+                        MaterialPageRoute(builder: (context) => AppointmentPage3(service: widget.service!, symptomns: symptomns.text,)));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

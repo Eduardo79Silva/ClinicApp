@@ -17,7 +17,16 @@ class _AppointmentListState extends State<AppointmentList> {
   @override
   Widget build(BuildContext context) {
 
-    final appointments = Provider.of<List<Appointment>>(context);
+    final appointments = Provider.of<List<Appointment>?>(context);
+    appointments!.sort((a, b) {
+      int compare = a.day.compareTo(b.day);
+
+      if (compare == 0) {
+        return a.time.compareTo(b.time);
+      } else {
+        return compare;
+      }
+    });
 
 
     return ListView.builder(

@@ -11,7 +11,8 @@ import 'appointment_page_3.dart';
 
 class ServicesBody extends StatefulWidget {
   final bool mainPage;
-  const ServicesBody({Key? key, required this.mainPage}) : super(key: key);
+  final String? symptomns;
+  const ServicesBody({Key? key, required this.mainPage, this.symptomns}) : super(key: key);
 
   @override
   _ServicesBodyState createState() => _ServicesBodyState();
@@ -102,7 +103,7 @@ class _ServicesBodyState extends State<ServicesBody> {
             context,
             MaterialPageRoute(builder: (context) => AppointmentPage(hasService: true, service: service.name,))) : Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AppointmentPage3()));},
+            MaterialPageRoute(builder: (context) => AppointmentPage3(service: service.name!, symptomns: widget.symptomns!,)));},
         child: Stack(children: [
           Container(
             height: Dimensions.pageViewContainer,

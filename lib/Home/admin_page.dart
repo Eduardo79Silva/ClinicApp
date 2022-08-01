@@ -32,7 +32,7 @@ class _AdminPageState extends State<AdminPage> {
   Widget build(BuildContext context) {
     return StreamProvider<List<Appointment>?>.value(
       initialData: null,
-      value: DatabaseService().userAppointments,
+      value: DatabaseService().allUserAppointments,
       child: Scaffold(
         key: _scaffoldKey,
         drawer: SideDrawer(),

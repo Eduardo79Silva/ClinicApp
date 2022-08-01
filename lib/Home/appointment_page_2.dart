@@ -1,4 +1,4 @@
-import 'package:clinic_app/home/main_page_services.dart';
+import 'package:clinic_app/Home/main_page_services.dart';
 import 'package:clinic_app/widgets/BigText.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +8,14 @@ import '../utils/dimensions.dart';
 import '../widgets/SmallText.dart';
 
 class AppointmentPage2 extends StatefulWidget {
-  const AppointmentPage2({Key? key}) : super(key: key);
+  final String symptomns;
+  const AppointmentPage2({Key? key, required this.symptomns}) : super(key: key);
 
   @override
   _AppointmentPageState2 createState() => _AppointmentPageState2();
 }
 
 class _AppointmentPageState2 extends State<AppointmentPage2> {
-  TextEditingController symptomns = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +111,7 @@ class _AppointmentPageState2 extends State<AppointmentPage2> {
                 )),
           ),
           SizedBox(height: Dimensions.height20 * 4),
-          const ServicesBody(mainPage: false),
+          ServicesBody(mainPage: false, symptomns: widget.symptomns),
         ]),
       ),
     );

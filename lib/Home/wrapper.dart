@@ -1,4 +1,5 @@
 import 'package:clinic_app/Home/admin_page.dart';
+import 'package:clinic_app/Home/appointment_page_1.dart';
 import 'package:clinic_app/Home/authenticate.dart';
 import 'package:clinic_app/Home/main_page.dart';
 import 'package:clinic_app/Utils/user.dart';
