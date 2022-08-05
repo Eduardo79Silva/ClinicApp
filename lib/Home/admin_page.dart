@@ -37,8 +37,7 @@ class _AdminPageState extends State<AdminPage> {
         key: _scaffoldKey,
         drawer: SideDrawer(),
         backgroundColor: Colors.grey[100],
-        body: SingleChildScrollView(
-          child: Column(
+        body: Column(
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -82,8 +81,8 @@ class _AdminPageState extends State<AdminPage> {
               const AppointmentList(),
             ],
           ),
+
         ),
-      ),
     );
   }
 }

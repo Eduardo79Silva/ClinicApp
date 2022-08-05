@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../Utils/user.dart';
+import '../Widgets/Doctor.dart';
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 import '../widgets/IconsText.dart';
@@ -23,11 +24,17 @@ class AppointmentPage3 extends StatefulWidget {
 
 class _AppointmentPageState3 extends State<AppointmentPage3> {
   TextEditingController symptomns = TextEditingController();
+  Doctor doctor = Doctor(name: 'Dr. Ricardo');
 
   DateTime? _selectedDay;
   var _res;
   @override
   Widget build(BuildContext context) {
+    doctor.getDaysFromDatabase();
+    Map? days = doctor.days;
+    doctor.getHoursFromDatabase(days!['Segunda-Feira']);
+    //doctor.getHours();
+
   final user = Provider.of<MyUser?>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -123,7 +130,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                   color: Colors.grey[500],
                 )),
           ),
-          SizedBox(height: Dimensions.height20 * 2.5),
+          SizedBox(height: Dimensions.height20 * 2),
           Padding(
             padding: const EdgeInsets.only(left: 30.0, bottom: 10,),
             child: Align(
@@ -140,7 +147,9 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+
             child: TableCalendar(
+
               locale: 'pt_PT',
               firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.utc(2030, 3, 14),

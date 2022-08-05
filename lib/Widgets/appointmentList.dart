@@ -31,17 +31,22 @@ class _AppointmentListState extends State<AppointmentList> {
       });
 
 
-      return ListView.builder(
-        itemCount: appointments.length,
-        itemBuilder: (context, index) {
-          return AppointmentWidget(appointment: appointments[index]);
-        },
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
+      return Expanded(
+        child: ListView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemCount: appointments.length,
+          itemBuilder: (context, index) {
+            return AppointmentWidget(appointment: appointments[index]);
+          },
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+        ),
       );
+
+
     }
     else{
-      return Center();
+      return Text('');
     }
   }
 }

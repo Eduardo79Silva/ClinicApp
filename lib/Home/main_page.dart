@@ -1,6 +1,7 @@
 
 import 'package:clinic_app/Services/database.dart';
 import 'package:clinic_app/Utils/user.dart';
+import 'package:clinic_app/Widgets/Doctor.dart';
 import 'package:clinic_app/Widgets/loading.dart';
 import 'package:clinic_app/Widgets/next_appointment.dart';
 import 'package:clinic_app/home/main_page_services.dart';
@@ -26,8 +27,11 @@ class _MainPageState extends State<MainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 
+
+
   @override
   Widget build(BuildContext context) {
+
     final user = Provider.of<MyUser?>(context);
     DatabaseService(uid: user!.uid).deleteAppointment();
     return StreamBuilder<UserData>(

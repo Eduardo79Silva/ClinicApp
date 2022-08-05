@@ -10,6 +10,9 @@ class DatabaseService{
   // collection reference
   final CollectionReference appointmentCollection = FirebaseFirestore.instance.collection("appointments");
   final CollectionReference userCollection = FirebaseFirestore.instance.collection("users");
+  final CollectionReference doctorCollection = FirebaseFirestore.instance.collection("doctors");
+  final CollectionReference serviceCollection = FirebaseFirestore.instance.collection("services");
+  final CollectionReference scheduleCollection = FirebaseFirestore.instance.collection("schedules");
 
 
   Future addAppointment(String especialidade, Timestamp dia, String hora) async {
@@ -32,9 +35,18 @@ class DatabaseService{
 
   }
 
+  // Future doctorSchedule(String name) async{
+  //   return await doctorCollection.doc(name).get().then((value){
+  //     List schedule = List.from(value.get('days'));
+  //   }
+  //   );
+  // }
+
+
   Future deleteAppointment() async {
+    //.where('hora', isLessThanOrEqualTo: now)
     String now = (DateTime.now().hour + DateTime.now().minute).toString();
-    var expired = appointmentCollection.where('dia', isLessThanOrEqualTo: DateTime.now()).where('hora', isLessThanOrEqualTo: now).snapshots();
+    var expired = appointmentCollection.where('dia', isLessThanOrEqualTo: DateTime.now()).snapshots();
     expired.forEach((element) {for (var element1 in element.docs) {print(element1.get('dia'));print(element1.get('hora'));appointmentCollection.doc(element1.id).delete();}});
   }
 
@@ -65,6 +77,7 @@ class DatabaseService{
     return appointmentCollection.snapshots().map(_appointmentFromSnap);
   }
 
+
   //get user doc stream
 
   Stream<UserData> get userData {
@@ -79,8 +92,37 @@ class DatabaseService{
     return userCollection.doc(userid).snapshots().map(_userDataFromSnapshot);
   }
 
+  Future doctorSchedule(String? name) async {
+    Map itemsList = {};
 
+    try {
+      await doctorCollection.doc(name).get().then((element) {
+        itemsList = element.get('days');
+      });
+      return itemsList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
+  Future daySchedule(String? id) async {
+    Map itemsList = {};
+    print(scheduleCollection.doc(id).id);
 
+    try {
+      await scheduleCollection.doc(id).get().then((element) {
+        itemsList = element.get('times');
+        itemsList.forEach((key, value) {if(value == false){
+
+        }
+        });
+      });
+      return itemsList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
 }
