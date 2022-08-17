@@ -7,19 +7,19 @@ import 'package:flutter/cupertino.dart';
 class Doctor {
   String? name;
   String? description;
-  Map? days;
+  List? days;
   Map? hours;
 
 
   Doctor({this.name, this.description, this.days, this.hours});
 
-  Map getDays(){
+  List getDays(){
     return days!;
   }
 
   Map getHours(){
     hours!.removeWhere((key, value) => value == false);
-    print(hours);
+    //print(hours);
     return hours!;
   }
 
@@ -44,7 +44,6 @@ class Doctor {
     }
     else{
       hours = result;
-
     }
 
   }

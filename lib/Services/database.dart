@@ -1,11 +1,16 @@
 import 'package:clinic_app/Utils/appointment.dart';
 import 'package:clinic_app/Utils/user.dart';
+import 'package:clinic_app/Widgets/Doctor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class DatabaseService{
 
   final String? uid;
-  DatabaseService({this.uid});
+  final String? doctorName;
+  final String? day;
+  DatabaseService({this.uid, this.doctorName, this.day});
 
   // collection reference
   final CollectionReference appointmentCollection = FirebaseFirestore.instance.collection("appointments");
@@ -13,6 +18,7 @@ class DatabaseService{
   final CollectionReference doctorCollection = FirebaseFirestore.instance.collection("doctors");
   final CollectionReference serviceCollection = FirebaseFirestore.instance.collection("services");
   final CollectionReference scheduleCollection = FirebaseFirestore.instance.collection("schedules");
+  final CollectionReference occupiedCollection = FirebaseFirestore.instance.collection("occupied");
 
 
   Future addAppointment(String especialidade, Timestamp dia, String hora) async {
@@ -35,12 +41,23 @@ class DatabaseService{
 
   }
 
+  Future addOccupied(DateTime day, String hour) async {
+    return await userCollection.doc(day.toString()).set({
+      'hour': hour
+    });
+
+  }
+
   // Future doctorSchedule(String name) async{
   //   return await doctorCollection.doc(name).get().then((value){
   //     List schedule = List.from(value.get('days'));
   //   }
   //   );
   // }
+
+  Future checkIfOccupied(DateTime day, String hour) async {
+   return await occupiedCollection.doc(day.toString()).snapshots().contains(hour);
+  }
 
 
   Future deleteAppointment() async {
@@ -61,6 +78,10 @@ class DatabaseService{
     return Appointment(specialty: snapshot.get('especialidade') ?? '', day: snapshot.get('dia') ?? Timestamp.fromDate(DateTime.now()), time: snapshot.get('hora') ?? '', uid: snapshot.get('uid') ?? '');
   }
 
+  Doctor _doctorFromSnap( DocumentSnapshot snapshot){
+    return Doctor(name: doctorName, days: snapshot.data().toString().contains('hours') ? snapshot.get('hours') : 0);
+  }
+
 
 
   List<MyUser> _userFromSnap( QuerySnapshot snapshot){
@@ -78,10 +99,15 @@ class DatabaseService{
   }
 
 
+
   //get user doc stream
 
   Stream<UserData> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  Stream<Doctor> get doctorData {
+    return doctorCollection.doc(doctorName).collection('days').doc(day).snapshots().map(_doctorFromSnap);
   }
 
   Stream<List<Appointment>> get userNextAppointment {
@@ -108,7 +134,7 @@ class DatabaseService{
 
   Future daySchedule(String? id) async {
     Map itemsList = {};
-    print(scheduleCollection.doc(id).id);
+    //print(scheduleCollection.doc(id).id);
 
     try {
       await scheduleCollection.doc(id).get().then((element) {
