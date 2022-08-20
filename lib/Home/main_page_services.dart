@@ -1,8 +1,8 @@
-import 'package:clinic_app/utils/colors.dart';
-import 'package:clinic_app/utils/dimensions.dart';
-import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/Service.dart';
-import 'package:clinic_app/widgets/SmallText.dart';
+import 'package:clinic_app/Utils/colors.dart';
+import 'package:clinic_app/Utils/dimensions.dart';
+import 'package:clinic_app/Widgets/BigText.dart';
+import 'package:clinic_app/Widgets/Service.dart';
+import 'package:clinic_app/Widgets/SmallText.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 

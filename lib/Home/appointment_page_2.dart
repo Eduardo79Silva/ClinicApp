@@ -1,11 +1,10 @@
 import 'package:clinic_app/Home/main_page_services.dart';
-import 'package:clinic_app/widgets/BigText.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:clinic_app/Widgets/BigText.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/colors.dart';
-import '../utils/dimensions.dart';
-import '../widgets/SmallText.dart';
+import '../Utils/colors.dart';
+import '../Utils/dimensions.dart';
+import '../Widgets/SmallText.dart';
 
 class AppointmentPage2 extends StatefulWidget {
   final String symptomns;

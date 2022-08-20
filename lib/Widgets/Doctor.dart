@@ -5,13 +5,13 @@ import 'package:clinic_app/Services/database.dart';
 import 'package:flutter/cupertino.dart';
 
 class Doctor {
-  String? name;
+  String name;
   String? description;
   List? days;
   Map? hours;
 
 
-  Doctor({this.name, this.description, this.days, this.hours});
+  Doctor({required this.name, this.description, this.days, this.hours});
 
   List getDays(){
     return days!;

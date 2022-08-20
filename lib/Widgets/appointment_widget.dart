@@ -54,6 +54,10 @@ class AppointmentWidget extends StatelessWidget {
                     SizedBox(
                       height: Dimensions.height10,
                     ),
+                    SmallText(
+                      text: userData.phoneNumbers,
+                      size: Dimensions.height15,
+                    ),
                     SizedBox(
                       height: Dimensions.height20,
                     ),

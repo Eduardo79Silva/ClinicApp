@@ -4,16 +4,16 @@ import 'package:clinic_app/Utils/user.dart';
 import 'package:clinic_app/Widgets/Doctor.dart';
 import 'package:clinic_app/Widgets/loading.dart';
 import 'package:clinic_app/Widgets/next_appointment.dart';
-import 'package:clinic_app/home/main_page_services.dart';
-import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/SideDrawer.dart';
+import 'package:clinic_app/Home/main_page_services.dart';
+import 'package:clinic_app/Widgets/BigText.dart';
+import 'package:clinic_app/Widgets/SideDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/colors.dart';
-import '../utils/dimensions.dart';
-import '../widgets/IconsText.dart';
-import '../widgets/SmallText.dart';
+import '../Utils/colors.dart';
+import '../Utils/dimensions.dart';
+import '../Widgets/IconsText.dart';
+import '../Widgets/SmallText.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

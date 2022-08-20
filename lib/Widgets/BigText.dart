@@ -1,4 +1,4 @@
-import 'package:clinic_app/utils/dimensions.dart';
+import 'package:clinic_app/Utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class BigText extends StatelessWidget {

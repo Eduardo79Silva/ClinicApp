@@ -1,6 +1,6 @@
 import 'package:clinic_app/Services/database.dart';
 import 'package:clinic_app/Widgets/loading.dart';
-import 'package:clinic_app/widgets/BigText.dart';
+import 'package:clinic_app/Widgets/BigText.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,10 +8,11 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../Utils/user.dart';
 import '../Widgets/Doctor.dart';
-import '../utils/colors.dart';
-import '../utils/dimensions.dart';
-import '../widgets/IconsText.dart';
-import '../widgets/SmallText.dart';
+import '../Utils/colors.dart';
+import '../Utils/dimensions.dart';
+import '../Widgets/IconsText.dart';
+import '../Widgets/SmallText.dart';
+import '../Widgets/appointment_widget.dart';
 
 class AppointmentPage3 extends StatefulWidget {
   final String service;
@@ -41,10 +42,27 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<MyUser?>(context);
+    var hours = doctor.days != null
+        ? List.generate(
+            doctor.days!.length,
+            (index) => RadioListTile(
+                activeColor: AppColors.mainColor2,
+                visualDensity: const VisualDensity(vertical: 0.1),
+                title: Text(doctor.days![index].toString()),
+                value: doctor.days![index].toString(),
+                groupValue: _res,
+                onChanged: (value) {
+                  setState(() {
+                    _res = value;
+                  });
+                }))
+        : Center();
     return StreamBuilder<Doctor>(
         stream: DatabaseService(
                 doctorName: 'Dr. Ricardo',
-                day: _selectedDay!.weekday.toString())
+                day: _selectedDay == null
+                    ? "0"
+                    : _selectedDay!.weekday.toString())
             .doctorData,
         builder: (context, snapshot) {
           if (_selectedDay != null) {
@@ -224,66 +242,27 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                                     textWeight: FontWeight.bold,
                                   )),
                             ),
-                            Expanded(
-                              child: ListView.builder(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                itemCount: doctor!.days!.length,
-                                itemBuilder: (context, index) {
-                                  return AppointmentWidget(
-                                      appointment: appointments[index]);
-                                },
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                              ),
+                            BigText(
+                              text: doctor!.name,
+                              weight: FontWeight.bold,
+                              size: Dimensions.height20,
                             ),
-                            RadioListTile(
-                                activeColor: AppColors.mainColor2,
-                                visualDensity:
-                                    const VisualDensity(vertical: 0.1),
-                                title: Text(doctor!.days.toString()),
-                                value: '11:30',
-                                groupValue: _res,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _res = value;
-                                  });
-                                }),
-                            RadioListTile(
-                                activeColor: AppColors.mainColor2,
-                                visualDensity:
-                                    const VisualDensity(vertical: 0.1),
-                                title: const Text("11:00"),
-                                value: '11:00',
-                                groupValue: _res,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _res = value;
-                                  });
-                                }),
-                            RadioListTile(
-                                activeColor: AppColors.mainColor2,
-                                visualDensity:
-                                    const VisualDensity(vertical: 0.1),
-                                title: const Text("11:30"),
-                                value: '11:30',
-                                groupValue: _res,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _res = value;
-                                  });
-                                }),
-                            RadioListTile(
-                                activeColor: AppColors.mainColor2,
-                                visualDensity:
-                                    const VisualDensity(vertical: 0.1),
-                                title: const Text("12:00"),
-                                value: '12:00',
-                                groupValue: _res,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _res = value;
-                                  });
-                                }),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: doctor.days!.length,
+                              itemBuilder: (context, index){
+                                return RadioListTile(activeColor: AppColors.mainColor2,
+                                    //visualDensity: const VisualDensity(vertical: 0.1),
+                                    title: Text(doctor.days![index].toString()),
+                                    value: doctor.days![index].toString(),
+                                    groupValue: _res,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _res = value;
+                                      });
+                                    });
+                              },
+                            ),
                           ],
                         ),
                         Padding(

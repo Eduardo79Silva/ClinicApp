@@ -1,19 +1,14 @@
 
-import 'package:clinic_app/Utils/user.dart';
-import 'package:clinic_app/home/main_page_services.dart';
-import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/SideDrawer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:clinic_app/Widgets/SideDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_app/Services/database.dart';
 import 'package:provider/provider.dart';
 
 import '../Utils/appointment.dart';
+import '../Utils/dimensions.dart';
+import '../Widgets/SideDrawer.dart';
 import '../Widgets/appointmentList.dart';
-import '../utils/colors.dart';
-import '../utils/dimensions.dart';
-import '../widgets/IconsText.dart';
-import '../widgets/SmallText.dart';
+import '../Utils/colors.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);

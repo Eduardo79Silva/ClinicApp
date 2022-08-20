@@ -1,4 +1,4 @@
-import 'package:clinic_app/widgets/SmallText.dart';
+import 'package:clinic_app/Widgets/SmallText.dart';
 import 'package:flutter/material.dart';
 
 class IconAndTextWidget extends StatelessWidget {

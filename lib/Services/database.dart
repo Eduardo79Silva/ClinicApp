@@ -79,7 +79,7 @@ class DatabaseService{
   }
 
   Doctor _doctorFromSnap( DocumentSnapshot snapshot){
-    return Doctor(name: doctorName, days: snapshot.data().toString().contains('hours') ? snapshot.get('hours') : 0);
+    return Doctor(name: doctorName!, days: snapshot.data().toString().contains('hours') ? snapshot.get('hours') : 0);
   }
 
 

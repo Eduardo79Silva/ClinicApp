@@ -3,7 +3,7 @@ import 'package:clinic_app/Utils/dimensions.dart';
 import 'package:clinic_app/Widgets/loading.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/colors.dart';
+import '../Utils/colors.dart';
 
 class LoginPage extends StatefulWidget {
 

@@ -3,9 +3,9 @@ import 'package:clinic_app/Services/auth.dart';
 import 'package:clinic_app/Utils/user.dart';
 import 'package:clinic_app/Widgets/loading.dart';
 import 'package:clinic_app/Widgets/popup.dart';
-import 'package:clinic_app/home/appointment_page_1.dart';
-import 'package:clinic_app/utils/colors.dart';
-import 'package:clinic_app/utils/my_flutter_app_icons.dart';
+import 'package:clinic_app/Home/appointment_page_1.dart';
+import 'package:clinic_app/Utils/colors.dart';
+import 'package:clinic_app/Utils/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
