@@ -219,16 +219,10 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                               return isSameDay(_selectedDay, day);
                             },
                             onDaySelected: (selectedDay, focusedDay) {
-
                               setState(() {
                                 _selectedDay = selectedDay;
 // update `_focusedDay` here as well
                               });
-                              doctor!.days!.forEach((element) { if(DatabaseService().checkIfOccupied(_selectedDay!, element.toString()) == true){
-                                element = null;
-                              }
-    });
-
                             },
                           ),
                         ),
@@ -263,10 +257,10 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                                 return RadioListTile(activeColor: AppColors.mainColor2,
                                     //visualDensity: const VisualDensity(vertical: 0.1),
                                     title: Text(doctor.days![index].toString()),
-                                    value:  doctor.days![index].toString(),
+                                    value: doctor.days![index].toString(),
+                                    
                                     groupValue: _res,
                                     onChanged: (value) {
-                                      DatabaseService().checkIfOccupied(_selectedDay!, doctor.days![index].toString()) ? null :
                                       setState(() {
                                         _res = value;
                                       });
