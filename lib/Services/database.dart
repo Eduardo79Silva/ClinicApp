@@ -49,19 +49,12 @@ class DatabaseService{
 
   }
 
-  bool checkIfOccupied(DateTime day, String hour)  {
-    bool occupied = false;
-    String finalDay = day.day.toString() + '-'+ day.month.toString();
-    print(day.month);
-    occupiedCollection.doc(finalDay).snapshots().contains(hour).then((value) => occupied = value);
-    return occupied;
-  }
 
   Future deleteAppointment() async {
     //.where('hora', isLessThanOrEqualTo: now)
     String now = (DateTime.now().hour + DateTime.now().minute).toString();
     var expired = appointmentCollection.where('dia', isLessThanOrEqualTo: DateTime.now()).snapshots();
-    expired.forEach((element) {for (var element1 in element.docs) {print(element1.get('dia'));print(element1.get('hora'));appointmentCollection.doc(element1.id).delete();}});
+    expired.forEach((element) {for (var element1 in element.docs) {appointmentCollection.doc(element1.id).delete();}});
   }
 
   
@@ -104,8 +97,6 @@ class DatabaseService{
   }
 
   Stream<Doctor> get doctorData {
-    print(service);
-    print(day);
     return serviceCollection.doc(service).collection('days').doc(day).snapshots().map(_doctorFromSnap);
   }
 
@@ -135,6 +126,21 @@ class DatabaseService{
 
     try {
       await serviceCollection.doc(name).collection('days').get().then((element) {
+        itemsList = element.docs.toList();
+      });
+      return itemsList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future checkOccupied(DateTime day) async {
+    List itemsList = [];
+    String finalDay = day.day.toString() + '-' + day.month.toString();
+
+    try {
+      await occupiedCollection.doc(finalDay).get().then((element) {
         itemsList = ['1', '2', '3'];
       });
       return itemsList;
@@ -146,7 +152,6 @@ class DatabaseService{
 
   Future daySchedule(String? id) async {
     Map itemsList = {};
-    //print(scheduleCollection.doc(id).id);
 
     try {
       await scheduleCollection.doc(id).get().then((element) {

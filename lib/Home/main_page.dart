@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future getOccupied() async{
-    await DatabaseService().checkIfOccupied(DateTime.now(), '11:00');
+    return null;
   }
 
 
@@ -44,7 +44,6 @@ class _MainPageState extends State<MainPage> {
         if (snapshot.hasData) {
 
           UserData? userData = snapshot.data;
-          DatabaseService().checkIfOccupied(DateTime.now(), '11:00');
 
           return FutureBuilder(
             future: getOccupied(),

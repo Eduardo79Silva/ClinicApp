@@ -33,18 +33,31 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
   DateTime? _selectedDay;
   var _res;
   List serviceDays = [];
+  Map<String, bool> occupied = {};
+  List hoursOccupied = [];
 
   Future getSchedule() async {
     await doctor.getDaysFromDatabase();
     List? days = doctor.getDays();
     //serviceDays = await DatabaseService().serviceSchedule(widget.service);
-   // print(doctor.days);
+    hoursOccupied = await DatabaseService().checkOccupied(_selectedDay!);
+  }
+
+  void getOccupied() {
+    serviceDays.forEach((element) {occupied[element] = false;});
+    for(var hour in hoursOccupied){
+      occupied.forEach((key, value) {
+        if(key == hour){
+          value = true;
+        }
+      });
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<MyUser?>(context);
-   // print(widget.service);
     var hours = doctor.days != null
         ? List.generate(
             doctor.days!.length,
@@ -69,7 +82,6 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
             .doctorData,
         builder: (context, snapshot) {
           if (_selectedDay != null) {
-            //print('');
           }
           if (snapshot.hasData) {
             Doctor? doctor = snapshot.data;
@@ -223,6 +235,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                                 _selectedDay = selectedDay;
 // update `_focusedDay` here as well
                               });
+                              //print(selectedDay);
                             },
                           ),
                         ),
