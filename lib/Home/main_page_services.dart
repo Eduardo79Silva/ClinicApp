@@ -24,7 +24,7 @@ class _ServicesBodyState extends State<ServicesBody> {
   final _height = Dimensions.pageViewContainer;
   final double _scaleFactor = 0.8;
   List<Service> services = [Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg", stars: 5, doctor: "Fisioterapeuta Carina"),
-                            Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg", stars: 4, doctor: "3 Doutores disponíveis"),
+                            Service(id: 1, name: "Dentista", img: "assets/image/dentista.jpg", stars: 4, doctor: "3 Doutores disponíveis"),
                             Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg", stars: 5, doctor: "Dr. Pedro"),
                             Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg", stars: 5, doctor: "Dra. Isabela"),
                             Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg", stars: 4, doctor: "Dra. Bruna")];

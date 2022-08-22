@@ -32,16 +32,19 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
 
   DateTime? _selectedDay;
   var _res;
+  List serviceDays = [];
 
   Future getSchedule() async {
     await doctor.getDaysFromDatabase();
     List? days = doctor.getDays();
-    print(doctor.days);
+    //serviceDays = await DatabaseService().serviceSchedule(widget.service);
+   // print(doctor.days);
   }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<MyUser?>(context);
+   // print(widget.service);
     var hours = doctor.days != null
         ? List.generate(
             doctor.days!.length,
@@ -59,14 +62,14 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
         : Center();
     return StreamBuilder<Doctor>(
         stream: DatabaseService(
-                doctorName: 'Dr. Ricardo',
+                service: widget.service,
                 day: _selectedDay == null
                     ? "0"
                     : _selectedDay!.weekday.toString())
             .doctorData,
         builder: (context, snapshot) {
           if (_selectedDay != null) {
-            print(_selectedDay!.weekday);
+            //print('');
           }
           if (snapshot.hasData) {
             Doctor? doctor = snapshot.data;
@@ -257,6 +260,7 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                                     value: doctor.days![index].toString(),
                                     groupValue: _res,
                                     onChanged: (value) {
+                                      DatabaseService().checkIfOccupied(_selectedDay!, doctor.days![index].toString()) ? null :
                                       setState(() {
                                         _res = value;
                                       });

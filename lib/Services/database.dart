@@ -10,7 +10,8 @@ class DatabaseService{
   final String? uid;
   final String? doctorName;
   final String? day;
-  DatabaseService({this.uid, this.doctorName, this.day});
+  final String? service;
+  DatabaseService({this.uid, this.doctorName, this.day, this.service});
 
   // collection reference
   final CollectionReference appointmentCollection = FirebaseFirestore.instance.collection("appointments");
@@ -48,17 +49,13 @@ class DatabaseService{
 
   }
 
-  // Future doctorSchedule(String name) async{
-  //   return await doctorCollection.doc(name).get().then((value){
-  //     List schedule = List.from(value.get('days'));
-  //   }
-  //   );
-  // }
-
-  Future checkIfOccupied(DateTime day, String hour) async {
-   return await occupiedCollection.doc(day.toString()).snapshots().contains(hour);
+  bool checkIfOccupied(DateTime day, String hour)  {
+    bool occupied = false;
+    String finalDay = day.day.toString() + '-'+ day.month.toString();
+    print(finalDay);
+    occupiedCollection.doc(finalDay).snapshots().contains(hour).then((value) => occupied = value);
+    return occupied;
   }
-
 
   Future deleteAppointment() async {
     //.where('hora', isLessThanOrEqualTo: now)
@@ -79,7 +76,7 @@ class DatabaseService{
   }
 
   Doctor _doctorFromSnap( DocumentSnapshot snapshot){
-    return Doctor(name: doctorName!, days: snapshot.data().toString().contains('hours') ? snapshot.get('hours') : 0);
+    return Doctor(name: snapshot.get('name'), days: snapshot.data().toString().contains('hours') ? snapshot.get('hours') : 0);
   }
 
 
@@ -107,7 +104,9 @@ class DatabaseService{
   }
 
   Stream<Doctor> get doctorData {
-    return doctorCollection.doc(doctorName).collection('days').doc(day).snapshots().map(_doctorFromSnap);
+    print(service);
+    print(day);
+    return serviceCollection.doc(service).collection('days').doc(day).snapshots().map(_doctorFromSnap);
   }
 
   Stream<List<Appointment>> get userNextAppointment {
@@ -124,6 +123,19 @@ class DatabaseService{
     try {
       await doctorCollection.doc(name).get().then((element) {
         itemsList = element.get('days');
+      });
+      return itemsList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+  Future serviceSchedule(String? name) async {
+    List itemsList = [];
+
+    try {
+      await serviceCollection.doc(name).collection('days').get().then((element) {
+        itemsList = ['1', '2', '3'];
       });
       return itemsList;
     } catch (e) {
