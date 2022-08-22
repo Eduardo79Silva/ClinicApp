@@ -55,7 +55,7 @@ class DatabaseService{
   //   );
   // }
 
-  Future checkIfOccupied(DateTime day, String hour) async {
+  Future checkIfOccupied(String day, String hour) async {
    return await occupiedCollection.doc(day.toString()).snapshots().contains(hour);
   }
 
