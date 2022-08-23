@@ -48,16 +48,17 @@ class AuthService{
   }
 
   //register
-  Future registerEmailPassword(String email, String password) async{
+  Future registerEmailPassword(String email, String password, String nome, String number,) async{
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? u = result.user;
-      
-      await DatabaseService(uid: u!.uid).addAppointment('Dentista', Timestamp.fromDate(DateTime.now()), '16:30');
+      await DatabaseService(uid: u!.uid).addUser(nome, email, number, false);
       return _userFromFirebaseUser(u);
     }
     catch(e){
+      print('---------------error----------------------');
       print(e.toString());
+      print('---------------error----------------------');
       return null;
     }
   }

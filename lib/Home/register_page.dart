@@ -3,7 +3,6 @@ import 'package:clinic_app/Utils/colors.dart';
 import 'package:clinic_app/Widgets/loading.dart';
 import 'package:clinic_app/Utils/dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 
@@ -98,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
         validator: (val) => val!.isEmpty ? 'Coloque o seu nome' : null,
         onChanged: (val){
           setState(() {
-            email=val;
+            nome=val;
           });
         },
       ),
@@ -218,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                setState(() {
                  loading = true;
                });
-               dynamic result = await _auth.registerEmailPassword(email, password);
+               dynamic result = await _auth.registerEmailPassword(email, password, nome, '926611676');
                if(result == null){
                  setState(() {
                    error = 'Por favor forneca um email valido';

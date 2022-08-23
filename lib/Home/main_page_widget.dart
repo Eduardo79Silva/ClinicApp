@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../utils/colors.dart';
-import '../utils/dimensions.dart';
-import '../widgets/BigText.dart';
-import '../widgets/IconsText.dart';
-import '../widgets/SmallText.dart';
+import '../Utils/colors.dart';
+import '../Utils/dimensions.dart';
+import '../Widgets/BigText.dart';
+import '../Widgets/IconsText.dart';
+import '../Widgets/SmallText.dart';
 
 class WidgetsWindows extends StatefulWidget {
   final String name;

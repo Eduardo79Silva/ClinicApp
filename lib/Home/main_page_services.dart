@@ -1,8 +1,8 @@
-import 'package:clinic_app/utils/colors.dart';
-import 'package:clinic_app/utils/dimensions.dart';
-import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/Service.dart';
-import 'package:clinic_app/widgets/SmallText.dart';
+import 'package:clinic_app/Utils/colors.dart';
+import 'package:clinic_app/Utils/dimensions.dart';
+import 'package:clinic_app/Widgets/BigText.dart';
+import 'package:clinic_app/Widgets/Service.dart';
+import 'package:clinic_app/Widgets/SmallText.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,8 @@ import 'appointment_page_3.dart';
 
 class ServicesBody extends StatefulWidget {
   final bool mainPage;
-  const ServicesBody({Key? key, required this.mainPage}) : super(key: key);
+  final String? symptomns;
+  const ServicesBody({Key? key, required this.mainPage, this.symptomns}) : super(key: key);
 
   @override
   _ServicesBodyState createState() => _ServicesBodyState();
@@ -23,7 +24,7 @@ class _ServicesBodyState extends State<ServicesBody> {
   final _height = Dimensions.pageViewContainer;
   final double _scaleFactor = 0.8;
   List<Service> services = [Service(id: 0, name: "Fisioterapia", img: "assets/image/fisioterapia.jpg", stars: 5, doctor: "Fisioterapeuta Carina"),
-                            Service(id: 1, name: "Dentária", img: "assets/image/dentista.jpg", stars: 4, doctor: "3 Doutores disponíveis"),
+                            Service(id: 1, name: "Dentista", img: "assets/image/dentista.jpg", stars: 4, doctor: "3 Doutores disponíveis"),
                             Service(id: 2, name: "Psiquiatria", img: "assets/image/psiquiatria.jpg", stars: 5, doctor: "Dr. Pedro"),
                             Service(id: 3, name: "Podologia", img: "assets/image/podologia.jpg", stars: 5, doctor: "Dra. Isabela"),
                             Service(id: 4, name: "Psicologia", img: "assets/image/psicologia.jpg", stars: 4, doctor: "Dra. Bruna")];
@@ -102,7 +103,7 @@ class _ServicesBodyState extends State<ServicesBody> {
             context,
             MaterialPageRoute(builder: (context) => AppointmentPage(hasService: true, service: service.name,))) : Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AppointmentPage3()));},
+            MaterialPageRoute(builder: (context) => AppointmentPage3(service: service.name!, symptomns: widget.symptomns!,)));},
         child: Stack(children: [
           Container(
             height: Dimensions.pageViewContainer,

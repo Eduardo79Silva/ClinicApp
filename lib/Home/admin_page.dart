@@ -1,19 +1,14 @@
 
-import 'package:clinic_app/Utils/user.dart';
-import 'package:clinic_app/home/main_page_services.dart';
-import 'package:clinic_app/widgets/BigText.dart';
-import 'package:clinic_app/widgets/SideDrawer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:clinic_app/Widgets/SideDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_app/Services/database.dart';
 import 'package:provider/provider.dart';
 
 import '../Utils/appointment.dart';
+import '../Utils/dimensions.dart';
+import '../Widgets/SideDrawer.dart';
 import '../Widgets/appointmentList.dart';
-import '../utils/colors.dart';
-import '../utils/dimensions.dart';
-import '../widgets/IconsText.dart';
-import '../widgets/SmallText.dart';
+import '../Utils/colors.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -32,13 +27,12 @@ class _AdminPageState extends State<AdminPage> {
   Widget build(BuildContext context) {
     return StreamProvider<List<Appointment>?>.value(
       initialData: null,
-      value: DatabaseService().userAppointments,
+      value: DatabaseService().allUserAppointments,
       child: Scaffold(
         key: _scaffoldKey,
         drawer: SideDrawer(),
         backgroundColor: Colors.grey[100],
-        body: SingleChildScrollView(
-          child: Column(
+        body: Column(
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -82,8 +76,8 @@ class _AdminPageState extends State<AdminPage> {
               const AppointmentList(),
             ],
           ),
+
         ),
-      ),
     );
   }
 }
