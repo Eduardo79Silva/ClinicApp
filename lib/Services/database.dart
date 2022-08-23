@@ -23,6 +23,12 @@ class DatabaseService{
 
 
   Future addAppointment(String especialidade, Timestamp dia, String hora) async {
+    List hourToAdd = [hora];
+    String finalDay = dia.toDate().day.toString() + '-' + dia.toDate().month.toString();
+    await occupiedCollection.doc(finalDay).set({
+      'hour': FieldValue.arrayUnion(hourToAdd)
+    }, SetOptions(merge: true));
+
     return await appointmentCollection.add({
       'especialidade': especialidade,
       'dia': dia,
@@ -43,10 +49,11 @@ class DatabaseService{
   }
 
   Future addOccupied(DateTime day, String hour) async {
-    return await userCollection.doc(day.toString()).set({
-      'hour': hour
-    });
-
+    List hourToAdd = [hour];
+    String finalDay = day.day.toString() + '-' + day.month.toString();
+    return await occupiedCollection.doc(finalDay).set({
+      'hour': FieldValue.arrayUnion(hourToAdd)
+    }, SetOptions(merge: true));
   }
 
 
@@ -141,7 +148,7 @@ class DatabaseService{
 
     try {
       await occupiedCollection.doc(finalDay).get().then((element) {
-        itemsList = ['1', '2', '3'];
+        itemsList = element.get('hour');
       });
       return itemsList;
     } catch (e) {

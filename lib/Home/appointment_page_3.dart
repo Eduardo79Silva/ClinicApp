@@ -35,15 +35,23 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
   List serviceDays = [];
   Map<String, bool> occupied = {};
   List hoursOccupied = [];
+  
+  bool checkOccupation(String currentTime){
+    if(hoursOccupied.contains(currentTime)){
+      return true;
+    }
+    return false;
+  }
 
   Future getSchedule() async {
     await doctor.getDaysFromDatabase();
     List? days = doctor.getDays();
     //serviceDays = await DatabaseService().serviceSchedule(widget.service);
-    hoursOccupied = await DatabaseService().checkOccupied(_selectedDay!);
   }
 
-  void getOccupied() {
+  Future getOccupied() async {
+    hoursOccupied = [];
+    hoursOccupied = await DatabaseService().checkOccupied(_selectedDay!);
     serviceDays.forEach((element) {occupied[element] = false;});
     for(var hour in hoursOccupied){
       occupied.forEach((key, value) {
@@ -267,17 +275,23 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                               shrinkWrap: true,
                               itemCount: doctor.days!.length,
                               itemBuilder: (context, index){
-                                return RadioListTile(activeColor: AppColors.mainColor2,
-                                    //visualDensity: const VisualDensity(vertical: 0.1),
-                                    title: Text(doctor.days![index].toString()),
-                                    value: doctor.days![index].toString(),
-                                    
-                                    groupValue: _res,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _res = value;
-                                      });
-                                    });
+                                return FutureBuilder(
+                                  future: getOccupied(),
+                                  builder: (context, snapshot) {
+                                    return AbsorbPointer(
+                                      absorbing: checkOccupation( doctor.days![index].toString()),
+                                      child: RadioListTile(activeColor: AppColors.mainColor2,
+                                          //visualDensity: const VisualDensity(vertical: 0.1),
+                                          title: checkOccupation(doctor.days![index].toString()) ? Text(doctor.days![index].toString() + '   (Ocupado)', style: TextStyle(color: Colors.redAccent),) : Text(doctor.days![index].toString()),
+                                          value: doctor.days![index].toString(),
+                                          groupValue: _res,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _res = value;
+                                            });
+                                          }),
+                                    );
+                                  });
                               },
                             ),
                           ],
@@ -304,11 +318,13 @@ class _AppointmentPageState3 extends State<AppointmentPage3> {
                                           5) //content padding inside button
                                       ),
                                   onPressed: () async {
-                                    DatabaseService(uid: user!.uid)
-                                        .addAppointment(
+                                    DatabaseService db =DatabaseService(uid: user!.uid);
+                                    db.addAppointment(
                                             widget.service,
                                             Timestamp.fromDate(_selectedDay!),
                                             _res);
+                                    // db.addOccupied(
+                                    //     _selectedDay!, _res);
                                     Navigator.of(context)
                                         .popUntil(ModalRoute.withName("/"));
                                   },
